@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+  --white: #ffffff;
+  --black: #000000;
+  --soul: #ff2020;
+  --soul-dim: #8b0000;
+  --green: #20ff60;
+  --yellow: #ffdd00;
+  --blue: #4080ff;
+  --gray: #808080;
+  --darkgray: #202020;
+  --border: #ffffff;
+  --font-pixel: 'Press Start 2P', system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  cursor: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--black);
+  color: var(--white);
+  font-family: var(--font-pixel);
+  font-size: 12px;
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+}
+
+/* SCANLINES overlay */
+.crt-overlay {
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(to bottom,
+      transparent 0px,
+      transparent 3px,
+      rgba(0, 0, 0, 0.15) 3px,
+      rgba(0, 0, 0, 0.15) 4px);
+  pointer-events: none;
+  z-index: 9000;
+}
+
+/* PIXEL BORDER utility */
+.px-border {
+  border: 4px solid var(--white);
+  box-shadow: 4px 4px 0 var(--gray);
+  image-rendering: pixelated;
+  position: relative;
+}
+
+.px-divider {
+  border: none;
+  border-top: 4px solid var(--white);
+  margin: 0;
+}
+
+/* Common Section Styles */
+section {
+  padding: 80px 32px;
+  max-width: 1000px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section-header {
+  font-size: 14px;
+  color: var(--white);
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.section-header::after {
+  content: '';
+  flex: 1;
+  height: 4px;
+  background: var(--white);
+}
+
+.section-header span {
+  color: var(--soul);
+}
+
+/* Animations */
+@keyframes soul-pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes blink {
+
+  0%,
+  49% {
+    opacity: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.blink {
+  animation: blink 1s steps(1) infinite;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--white);
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+button:hover {
+  border-color: #646cff;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+
+  a:hover {
+    color: #747bff;
+  }
+
+  button {
+    background-color: #f9f9f9;
+  }
+}
