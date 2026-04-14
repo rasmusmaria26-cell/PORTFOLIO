@@ -169,6 +169,14 @@
       display: flex;
       align-items: center;
       gap: 0.8rem;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.8s ease;
+    }
+
+    .top-logo.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .top-logo .logo {
@@ -194,6 +202,14 @@
       border-left: 1px solid var(--gray-2);
       background: rgba(5, 8, 16, 0.4);
       backdrop-filter: blur(8px);
+      opacity: 0;
+      transform: translateX(20px);
+      transition: all 0.8s ease;
+    }
+
+    .side-nav.visible {
+      opacity: 1;
+      transform: translateX(0);
     }
 
     .side-nav-item {
@@ -402,6 +418,23 @@
       margin-bottom: 1.5rem;
       position: relative;
       white-space: nowrap;
+      min-height: 58px;
+      /* reserve space during typing */
+    }
+
+    .char {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(-10px);
+      animation: drop-in 0.3s forwards;
+    }
+
+    @keyframes drop-in {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+        text-shadow: 0 0 10px rgba(0, 245, 212, 0.5);
+      }
     }
 
     .hero-name.glitch {
@@ -2298,6 +2331,9 @@
     const heroContent = document.getElementById('hero-content');
     const glitchName = document.getElementById('glitch-name');
 
+    // Clear the hardcoded name immediately so it doesn't pop in before the scramble animation starts
+    glitchName.innerText = '';
+
     async function runBootSequence() {
       await new Promise(r => setTimeout(r, 400)); // Initial pause
       for (const line of bootLines) {
@@ -2310,10 +2346,16 @@
       bootOverlay.style.opacity = '0';
       setTimeout(() => {
         bootOverlay.style.display = 'none';
-        heroContent.classList.add('visible');
-        // -- 3. GLITCH ON LOAD --
-        glitchName.classList.add('glitch');
-        setTimeout(() => glitchName.classList.remove('glitch'), 400); // Remove after 1 iteration
+
+        // Cinematic staggered element reveal
+        document.querySelector('.top-logo').classList.add('visible');
+        setTimeout(() => document.querySelector('.side-nav').classList.add('visible'), 200);
+        setTimeout(() => heroContent.classList.add('visible'), 400);
+
+        // Name animation sequence
+        setTimeout(() => {
+          animateName();
+        }, 800);
       }, 800);
     }
 
@@ -2492,20 +2534,24 @@
       });
     });
 
-    // -- NAME LETTER DROP ANIMATION (fires after boot completes ~8s) --
+    // -- NAME CYBERPUNK DECODING ANIMATION --
     function animateName() {
       const nameEl = document.getElementById('glitch-name');
-      const name = 'MARIA RASMUS R';
-      nameEl.innerHTML = '';
-      [...name].forEach((char, i) => {
-        const span = document.createElement('span');
-        span.className = 'char';
-        span.textContent = char === ' ' ? '\u00a0' : char;
-        span.style.animationDelay = `${i * 60}ms`;
-        nameEl.appendChild(span);
-      });
+      const finalName = 'MARIA RASMUS R';
+      const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*';
+      let iter = 0;
+
+      const interval = setInterval(() => {
+        nameEl.innerText = finalName.split('').map((char, index) => {
+          if (char === ' ') return ' ';
+          if (index < iter) return char;
+          return letters[Math.floor(Math.random() * letters.length)];
+        }).join('');
+
+        if (iter >= finalName.length) clearInterval(interval);
+        iter += 1 / 3;
+      }, 30);
     }
-    setTimeout(animateName, 8500);
 
     // Start Sequence
     window.addEventListener('DOMContentLoaded', () => {
