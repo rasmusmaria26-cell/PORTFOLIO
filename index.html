@@ -1209,65 +1209,164 @@
       font-family: 'Space Grotesk', sans-serif;
     }
 
-    /* Responsive adjustments */
+    /* === NEW ANIMATIONS === */
+
+    /* Scroll progress bar */
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: var(--teal);
+      width: 0%;
+      z-index: 9999;
+      transition: width 0.1s linear;
+      box-shadow: 0 0 8px var(--teal);
+    }
+
+    /* Cursor glow */
+    #cursor-glow {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 245, 212, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 999;
+      transform: translate(-50%, -50%);
+      transition: left 0.08s ease, top 0.08s ease;
+    }
+
+    /* Hero layout with photo */
+    #hero {
+      position: relative;
+    }
+
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5rem;
+      flex-wrap: wrap;
+      text-align: left;
+    }
+
+    .hero-photo-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .hero-photo-hex {
+      width: 260px;
+      height: 300px;
+      overflow: hidden;
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      border: 2px solid var(--teal);
+      box-shadow: 0 0 30px rgba(0, 245, 212, 0.2), inset 0 0 30px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    .hero-photo-hex img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: grayscale(20%) contrast(1.1);
+      transition: filter 0.5s ease;
+    }
+
+    .hero-photo-hex:hover img {
+      filter: grayscale(0%) contrast(1);
+    }
+
+    /* CRT scan line over photo */
+    .hero-photo-hex::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(to bottom, transparent 0px, transparent 3px,
+          rgba(0, 0, 0, 0.2) 3px, rgba(0, 0, 0, 0.2) 4px);
+      pointer-events: none;
+    }
+
+    /* animated scan sweep */
+    .hero-photo-hex::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(to right, transparent, var(--teal), transparent);
+      animation: scan-sweep 3s linear infinite;
+      z-index: 2;
+    }
+
+    @keyframes scan-sweep {
+      from {
+        top: -3px;
+        opacity: 0.8;
+      }
+
+      to {
+        top: 100%;
+        opacity: 0;
+      }
+    }
+
+    .photo-badge {
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-2);
+      border: 1px solid var(--teal);
+      font-size: 9px;
+      color: var(--teal);
+      padding: 4px 12px;
+      letter-spacing: 0.15em;
+      white-space: nowrap;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .hero-text {
+      max-width: 560px;
+    }
+
     @media (max-width: 768px) {
-      .nav-links {
-        display: none;
+      .hero-inner {
+        flex-direction: column;
+        text-align: center;
+        gap: 3rem;
       }
 
-      .hamburger {
-        display: block;
+      .hero-photo-hex {
+        width: 200px;
+        height: 230px;
       }
+    }
 
-      .grid-2col,
-      .grid-2col-even,
-      .hero-projects,
-      .secondary-projects,
-      .contact-grid {
-        grid-template-columns: 1fr;
-      }
+    /* Card tilt effect */
+    .tilt-card {
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
 
-      .records-timeline::before {
-        left: 0;
-      }
+    /* Name letter-by-letter animation */
+    .hero-name .char {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: char-drop 0.4s forwards;
+    }
 
-      .record-entry {
-        flex-direction: column !important;
-        align-items: flex-start;
-        margin-bottom: 3rem;
-      }
-
-      .record-date {
-        width: 100%;
-        text-align: left !important;
-        margin-bottom: 1rem;
-        padding-left: 2rem;
-      }
-
-      .record-card {
-        width: 100%;
-        margin-left: 0;
-      }
-
-      .record-card::after {
-        display: none !important;
-      }
-
-      .record-dot {
-        left: 0;
-        transform: translateX(-5px);
-        margin-top: 25px;
-      }
-
-      .hero-name {
-        font-size: 40px;
-      }
-
-      .mission-brief {
-        padding: 2rem;
+    @keyframes char-drop {
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
   </style>
+
 </head>
 
 <body>
@@ -1277,6 +1376,8 @@
   <div class="bg-glow"></div>
   <div class="bg-noise"></div>
   <canvas id="particle-canvas"></canvas>
+  <div id="scroll-progress"></div>
+  <div id="cursor-glow"></div>
 
   <!-- Boot Sequence -->
   <div id="boot-sequence">
@@ -1312,14 +1413,26 @@
   <!-- HERO -->
   <section id="hero" class="container">
     <div class="hero-content" id="hero-content">
-      <div class="clearance-label">OPERATIVE // CLEARANCE LEVEL: ENGINEER</div>
-      <div class="hero-name" id="glitch-name">MARIA RASMUS R</div>
-      <div class="tagline-container">
-        <span class="tagline" id="tagline-typist"></span>
-      </div>
-      <div class="cta-group">
-        <a href="#deployments" class="btn btn-primary nav-btn">VIEW DEPLOYMENTS</a>
-        <a href="#channel" class="btn btn-secondary nav-btn">OPEN CHANNEL</a>
+      <div class="hero-inner">
+        <!-- Photo -->
+        <div class="hero-photo-wrap">
+          <div class="hero-photo-hex">
+            <img src="rasmus.jpeg" alt="Maria Rasmus R" />
+          </div>
+          <div class="photo-badge">// OPERATIVE IDENTIFIED</div>
+        </div>
+        <!-- Text -->
+        <div class="hero-text">
+          <div class="clearance-label">OPERATIVE // CLEARANCE LEVEL: ENGINEER</div>
+          <div class="hero-name" id="glitch-name">MARIA RASMUS R</div>
+          <div class="tagline-container">
+            <span class="tagline" id="tagline-typist"></span>
+          </div>
+          <div class="cta-group">
+            <a href="#deployments" class="btn btn-primary nav-btn">VIEW DEPLOYMENTS</a>
+            <a href="#channel" class="btn btn-secondary nav-btn">OPEN CHANNEL</a>
+          </div>
+        </div>
       </div>
     </div>
     <div class="scroll-indicator">
@@ -1330,6 +1443,7 @@
       </svg>
     </div>
   </section>
+
 
   <!-- PROFILE -->
   <section id="profile" class="container section-target">
@@ -1858,6 +1972,72 @@
       }
     }
 
+    // -- CURSOR GLOW --
+    const cursorGlow = document.getElementById('cursor-glow');
+    document.addEventListener('mousemove', (e) => {
+      cursorGlow.style.left = e.clientX + 'px';
+      cursorGlow.style.top = e.clientY + 'px';
+    });
+
+    // -- SCROLL PROGRESS BAR --
+    const scrollBar = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', () => {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = (window.scrollY / total) * 100;
+      scrollBar.style.width = pct + '%';
+    });
+
+    // -- CARD TILT EFFECT --
+    document.querySelectorAll('.project-card, .sp-card, .cap-panel').forEach(card => {
+      card.classList.add('tilt-card');
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const cx = rect.width / 2;
+        const cy = rect.height / 2;
+        const rx = ((y - cy) / cy) * -5;
+        const ry = ((x - cx) / cx) * 5;
+        card.style.transform = `perspective(600px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+
+    // -- NAME LETTER DROP ANIMATION (after boot) --
+    function animateName() {
+      const nameEl = document.getElementById('glitch-name');
+      const name = 'MARIA RASMUS R';
+      nameEl.innerHTML = '';
+      [...name].forEach((char, i) => {
+        const span = document.createElement('span');
+        span.className = 'char';
+        span.textContent = char === ' ' ? '\u00a0' : char;
+        span.style.animationDelay = `${i * 60}ms`;
+        nameEl.appendChild(span);
+      });
+    }
+
+    // Patch boot sequence to trigger letter animation after reveal
+    const _origBoot = runBootSequence;
+    async function runBootSequence() {
+      await _origBoot();
+    }
+
+    // Override hero reveal to include letter animation
+    const origTimeout = window._heroTimeout;
+    // We patch directly: override bootOverlay hide callback
+    const _patch = () => {
+      const _boot = document.getElementById('boot-sequence');
+      if (!_boot || _boot.style.display === 'none') {
+        animateName();
+      } else {
+        setTimeout(_patch, 200);
+      }
+    };
+    setTimeout(_patch, 8000); // safely after boot completes
+
     // Start Sequence
     window.addEventListener('DOMContentLoaded', () => {
       runBootSequence();
@@ -1865,6 +2045,7 @@
       typeContactStatus();
     });
   </script>
+
 </body>
 
 </html>
