@@ -120,43 +120,12 @@
       left: 0;
     }
 
-    /* Navigation */
+    /* Navigation — top nav hidden, replaced with side panel below */
     nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 100;
-      background: rgba(5, 8, 16, 0.7);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--gray-2);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
+      display: none;
     }
 
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .nav-left .logo {
-      color: var(--teal);
-      font-weight: 700;
-      font-size: 1.2rem;
-      font-family: 'Space Grotesk', sans-serif;
-    }
-
-    .nav-status {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 10px;
-      color: var(--teal);
-      letter-spacing: 1px;
-    }
-
+    /* Pulse dot (keep for footer/logo) */
     .dot-pulse {
       width: 8px;
       height: 8px;
@@ -179,51 +148,123 @@
       }
     }
 
-    .nav-links {
+    .nav-status {
       display: flex;
-      gap: 2rem;
-    }
-
-    .nav-links a {
-      color: var(--white);
-      text-decoration: none;
-      font-size: 11px;
-      text-transform: uppercase;
-      font-family: 'Space Grotesk', sans-serif;
-      letter-spacing: 0.1em;
-      position: relative;
-      padding-bottom: 4px;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      height: 1px;
-      width: 0;
-      background: var(--teal);
-      transition: width 0.3s ease;
-    }
-
-    .nav-links a:hover::after,
-    .nav-links a.active::after {
-      width: 100%;
-    }
-
-    .nav-links a.active {
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 10px;
       color: var(--teal);
-      text-shadow: 0 0 10px rgba(0, 245, 212, 0.4);
+      letter-spacing: 1px;
+      font-family: 'Space Grotesk', sans-serif;
     }
 
+    /* Top-left monogram */
+    .top-logo {
+      position: fixed;
+      top: 1.5rem;
+      left: 1.5rem;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .top-logo .logo {
+      color: var(--teal);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 1.3rem;
+    }
+
+    /* Right-side vertical nav panel */
+    .side-nav {
+      position: fixed;
+      right: 0;
+      top: 0;
+      height: 100vh;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+      padding: 0 1.6rem;
+      gap: 2.5rem;
+      border-left: 1px solid var(--gray-2);
+      background: rgba(5, 8, 16, 0.4);
+      backdrop-filter: blur(8px);
+    }
+
+    .side-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      position: relative;
+    }
+
+    .side-nav-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gray-2);
+      border: 1px solid var(--gray-1);
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .side-nav-item:hover .side-nav-dot,
+    .side-nav-item.active .side-nav-dot {
+      background: var(--teal);
+      border-color: var(--teal);
+      box-shadow: 0 0 8px rgba(0, 245, 212, 0.8);
+    }
+
+    .side-nav-label {
+      font-size: 9px;
+      color: var(--gray-1);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-family: 'Space Grotesk', sans-serif;
+      opacity: 0;
+      transform: translateX(8px);
+      transition: all 0.25s ease;
+      white-space: nowrap;
+      position: absolute;
+      right: 1.4rem;
+    }
+
+    .side-nav-item:hover .side-nav-label,
+    .side-nav-item.active .side-nav-label {
+      opacity: 1;
+      transform: translateX(0);
+      color: var(--teal);
+    }
+
+    /* Hamburger for mobile */
     .hamburger {
       display: none;
+      position: fixed;
+      top: 1.2rem;
+      right: 1rem;
+      z-index: 200;
       background: none;
       border: none;
       color: var(--teal);
       font-size: 1.5rem;
       cursor: pointer;
     }
+
+    @media (max-width: 768px) {
+      .side-nav {
+        display: none;
+      }
+
+      .hamburger {
+        display: block;
+      }
+    }
+
 
     /* Mobile Nav */
     .mobile-nav-overlay {
@@ -353,11 +394,12 @@
     }
 
     .hero-name {
-      font-size: 72px;
+      font-size: 48px;
       font-weight: 800;
       color: var(--white);
       margin-bottom: 1.5rem;
       position: relative;
+      white-space: nowrap;
     }
 
     .hero-name.glitch {
@@ -1144,8 +1186,41 @@
       grid-template-columns: 1fr 1fr;
       gap: 1.5rem;
       max-width: 500px;
+      margin: 0 auto 1.5rem auto;
+    }
+
+    .resume-row {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      max-width: 500px;
       margin: 0 auto 4rem auto;
     }
+
+    .resume-row .contact-btn {
+      flex: 1;
+    }
+
+    .resume-btn-view {
+      border-color: var(--amber) !important;
+      color: var(--amber) !important;
+    }
+
+    .resume-btn-view:hover {
+      background: var(--amber) !important;
+      color: var(--bg) !important;
+    }
+
+    .resume-btn-dl {
+      border-color: var(--gray-1) !important;
+      color: var(--gray-1) !important;
+    }
+
+    .resume-btn-dl:hover {
+      background: var(--gray-1) !important;
+      color: var(--bg) !important;
+    }
+
 
     .contact-btn {
       display: flex;
@@ -1224,18 +1299,18 @@
       box-shadow: 0 0 8px var(--teal);
     }
 
-    /* Cursor glow */
+    /* Cursor glow — no transition, follows cursor instantly */
     #cursor-glow {
       position: fixed;
       width: 300px;
       height: 300px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(0, 245, 212, 0.05) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(0, 245, 212, 0.06) 0%, transparent 70%);
       pointer-events: none;
       z-index: 999;
       transform: translate(-50%, -50%);
-      transition: left 0.08s ease, top 0.08s ease;
     }
+
 
     /* Hero layout with photo */
     #hero {
@@ -1365,12 +1440,444 @@
         transform: translateY(0);
       }
     }
+
+    /* ============================
+       CINEMATIC MOBILE RESPONSIVENESS
+       ============================ */
+    @media (max-width: 768px) {
+
+      /* Transform side-nav into a bottom HUD dock */
+      .side-nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 70px;
+        width: 100%;
+        padding: 0 1rem;
+        gap: 0;
+        border-left: none;
+        border-top: 1px solid var(--gray-2);
+        background: rgba(5, 8, 16, 0.85);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.8);
+      }
+
+      .side-nav-item {
+        flex-direction: column;
+        gap: 4px;
+        justify-content: center;
+        padding: 0.5rem;
+      }
+
+      .side-nav-dot {
+        width: 8px;
+        height: 8px;
+      }
+
+      .side-nav-label {
+        position: relative;
+        right: auto;
+        transform: none;
+        opacity: 1;
+        font-size: 7px;
+        color: var(--gray-2);
+      }
+
+      .side-nav-item:hover .side-nav-label,
+      .side-nav-item.active .side-nav-label {
+        transform: none;
+        color: var(--teal);
+        text-shadow: 0 0 5px var(--teal);
+      }
+
+      .hamburger {
+        display: none;
+      }
+
+      /* Container padding - leave room for bottom dock */
+      .container {
+        padding: 4rem 1.2rem 6rem 1.2rem;
+      }
+
+      /* Hero - ID Card Layout */
+      #hero {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        padding-top: 5rem;
+      }
+
+      .hero-inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1.5rem;
+        background: linear-gradient(180deg, rgba(0, 245, 212, 0.05) 0%, transparent 100%);
+        padding: 3rem 1.5rem;
+        border-radius: 8px;
+        border-top: 1px solid var(--teal);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      }
+
+      .hero-photo-hex {
+        width: 200px;
+        height: 230px;
+        box-shadow: 0 0 20px rgba(0, 245, 212, 0.4), inset 0 0 20px rgba(0, 0, 0, 0.8);
+      }
+
+      .photo-badge {
+        font-size: 10px;
+        padding: 6px 16px;
+        bottom: -16px;
+      }
+
+      .hero-text {
+        max-width: 100%;
+        margin-top: 1rem;
+      }
+
+      .hero-name {
+        font-size: 34px;
+        white-space: normal;
+        line-height: 1.1;
+        text-shadow: 0 0 15px rgba(0, 245, 212, 0.3);
+      }
+
+      .clearance-label {
+        font-size: 10px;
+        background: rgba(0, 245, 212, 0.1);
+        padding: 4px 8px;
+        display: inline-block;
+        margin-bottom: 1rem;
+      }
+
+      .tagline {
+        font-size: 13px;
+      }
+
+      .cta-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.2rem;
+        margin-top: 1rem;
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 1.2rem;
+      }
+
+      .resume-row {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      /* Profile section */
+      .grid-2col {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .mission-brief {
+        border-left: none;
+        border-top: 2px solid var(--teal);
+        padding: 2rem 1.5rem;
+        background: linear-gradient(180deg, rgba(0, 245, 212, 0.03), transparent);
+      }
+
+      .panel-header {
+        font-size: 11px;
+        margin-bottom: 1.5rem;
+      }
+
+      .spec-label {
+        width: auto;
+        font-size: 10px;
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .spec-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      /* Deployments */
+      .hero-projects {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .secondary-projects {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .project-card {
+        padding: 1.8rem 1.5rem;
+        border: none;
+        border-top: 2px solid var(--teal);
+        background: linear-gradient(180deg, rgba(0, 245, 212, 0.05), rgba(5, 8, 16, 0.8));
+      }
+
+      .project-glow-amber {
+        border-top-color: var(--amber);
+        background: linear-gradient(180deg, rgba(255, 183, 3, 0.05), rgba(5, 8, 16, 0.8));
+      }
+
+      .pc-title {
+        font-size: 24px;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
+
+      .pc-subtitle {
+        font-size: 12px;
+      }
+
+      .pc-footer {
+        flex-direction: column;
+        gap: 1.2rem;
+        align-items: flex-start;
+        background: rgba(0, 0, 0, 0.3);
+        padding: 1rem;
+        border-radius: 4px;
+      }
+
+      /* Capabilities */
+      .grid-2col-even {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .cap-panel {
+        padding: 1.5rem;
+        border-left: none;
+        border-top: 1px solid var(--gray-2);
+      }
+
+      .cap-label {
+        width: 90px;
+        font-size: 10px;
+      }
+
+      .cap-blocks {
+        font-size: 10px;
+        margin: 0 1rem;
+      }
+
+      /* Records timeline - vertical stack with glowing nodes */
+      .records-timeline::before {
+        left: 24px;
+        background: var(--teal);
+        opacity: 0.3;
+      }
+
+      .record-entry,
+      .record-entry:nth-child(odd),
+      .record-entry:nth-child(even) {
+        flex-direction: column !important;
+        align-items: flex-start;
+        padding-left: 3.5rem;
+        margin-bottom: 3.5rem;
+      }
+
+      .record-date,
+      .record-entry:nth-child(odd) .record-date,
+      .record-entry:nth-child(even) .record-date {
+        width: auto;
+        text-align: left !important;
+        margin-bottom: 0.5rem;
+        padding-left: 0;
+        font-size: 16px;
+        text-shadow: 0 0 10px currentColor;
+      }
+
+      .record-card {
+        width: 100%;
+        margin-left: 0;
+        padding: 1.5rem;
+        background: rgba(10, 14, 24, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .record-card::after {
+        display: none !important;
+      }
+
+      .record-dot {
+        left: 24px;
+        top: 0;
+        transform: translate(-50%, 0);
+        margin-top: 3px;
+        width: 14px;
+        height: 14px;
+      }
+
+      .record-entry.win .record-card {
+        border-top: 2px solid var(--teal);
+        box-shadow: 0 -10px 20px -10px rgba(0, 245, 212, 0.2);
+        border-left: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      /* Open channel */
+      #channel {
+        padding: 4rem 0 6rem 0;
+      }
+
+      .channel-heading {
+        font-size: 22px;
+        line-height: 1.2;
+      }
+
+      .channel-sub {
+        font-size: 12px;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+        gap: 1rem;
+      }
+
+      .contact-btn {
+        padding: 1.2rem;
+        justify-content: center;
+        width: 100%;
+      }
+
+      /* Footer */
+      footer {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 2rem 1.5rem 7rem 1.5rem;
+        text-align: center;
+      }
+
+      /* Visual spacing */
+      .section-label {
+        font-size: 10px;
+        margin-bottom: 2.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding-bottom: 1rem;
+        width: 100%;
+      }
+
+      .signal-tags,
+      .sp-tags {
+        gap: 0.5rem;
+      }
+
+      .tag,
+      .sp-tags span {
+        font-size: 8px;
+        padding: 0.4rem 0.6rem;
+        border-radius: 2px;
+      }
+
+      /* Top logo stays */
+      .top-logo {
+        top: 1.2rem;
+        left: 1.2rem;
+        background: rgba(5, 8, 16, 0.8);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(0, 245, 212, 0.2);
+      }
+    }
+
+    /* Very small screens */
+    @media (max-width: 400px) {
+      .hero-name {
+        font-size: 28px;
+      }
+
+      .hero-photo-hex {
+        width: 160px;
+        height: 185px;
+      }
+
+      .container {
+        padding: 3rem 1rem 6rem 1rem;
+      }
+    }
   </style>
+
 
 </head>
 
 <body>
   <!-- HTML_PLACEHOLDER -->
+  <!-- Top-left monogram -->
+  <div class="top-logo">
+    <div class="logo">MR</div>
+    <div class="nav-status">
+      <div class="dot-pulse"></div> ONLINE
+    </div>
+  </div>
+
+  <!-- HUD Dock Navigation (replaces side nav on desktop and hamburger on mobile) -->
+  <nav class="side-nav" id="side-nav">
+    <a href="#profile" class="side-nav-item nav-btn">
+      <span class="side-nav-label">PROFILE</span>
+      <span class="side-nav-dot"></span>
+    </a>
+    <a href="#deployments" class="side-nav-item nav-btn">
+      <span class="side-nav-label">DEPLOYMENTS</span>
+      <span class="side-nav-dot"></span>
+    </a>
+    <a href="#capabilities" class="side-nav-item nav-btn">
+      <span class="side-nav-label">CAPABILITIES</span>
+      <span class="side-nav-dot"></span>
+    </a>
+    <a href="#records" class="side-nav-item nav-btn">
+      <span class="side-nav-label">RECORDS</span>
+      <span class="side-nav-dot"></span>
+    </a>
+    <a href="#channel" class="side-nav-item nav-btn">
+      <span class="side-nav-label">CHANNEL</span>
+      <span class="side-nav-dot"></span>
+    </a>
+  </nav>
+
+  <!-- Top-left monogram -->
+  <div class="top-logo">
+    <div class="logo">MR</div>
+    <div class="nav-status">
+      <div class="dot-pulse"></div> ONLINE
+    </div>
+  </div>
+
+  <!-- HUD Dock Navigation (replaces side nav on desktop and hamburger on mobile) -->
+  <nav class="side-nav" id="side-nav">
+    <a href="#profile" class="side-nav-item nav-btn">
+      <span class="side-nav-label">PROFILE</span>
+      <span class="side-nav-dot"></span>
+    </a>
+    <a href="#deployments" class="side-nav-item nav-btn">
+      <span class="side-nav-label">DEPLOYMENTS</span>
+      <span class="side-nav-dot"></span>
+    </a>
+    <a href="#capabilities" class="side-nav-item nav-btn">
+      <span class="side-nav-label">CAPABILITIES</span>
+      <span class="side-nav-dot"></span>
+    </a>
+    <a href="#records" class="side-nav-item nav-btn">
+      <span class="side-nav-label">RECORDS</span>
+      <span class="side-nav-dot"></span>
+    </a>
+    <a href="#channel" class="side-nav-item nav-btn">
+      <span class="side-nav-label">CHANNEL</span>
+      <span class="side-nav-dot"></span>
+    </a>
+  </nav>
+
   <!-- Backgrounds -->
   <div class="bg-grid"></div>
   <div class="bg-glow"></div>
@@ -1384,31 +1891,8 @@
     <div id="terminal-output"></div>
   </div>
 
-  <!-- Mobile Nav Overlay -->
-  <div class="mobile-nav-overlay" id="mobile-nav">
-    <a href="#profile" class="nav-btn">PROFILE</a>
-    <a href="#deployments" class="nav-btn">DEPLOYMENTS</a>
-    <a href="#capabilities" class="nav-btn">CAPABILITIES</a>
-    <a href="#records" class="nav-btn">RECORDS</a>
-    <a href="#channel" class="nav-btn">CHANNEL</a>
-  </div>
 
-  <nav>
-    <div class="nav-left">
-      <div class="logo">MR</div>
-      <div class="nav-status">
-        <div class="dot-pulse"></div> ONLINE
-      </div>
-    </div>
-    <div class="nav-links">
-      <a href="#profile" class="nav-btn">PROFILE</a>
-      <a href="#deployments" class="nav-btn">DEPLOYMENTS</a>
-      <a href="#capabilities" class="nav-btn">CAPABILITIES</a>
-      <a href="#records" class="nav-btn">RECORDS</a>
-      <a href="#channel" class="nav-btn">CHANNEL</a>
-    </div>
-    <button class="hamburger" id="menu-toggle">☰</button>
-  </nav>
+
 
   <!-- HERO -->
   <section id="hero" class="container">
@@ -1743,14 +2227,14 @@
         </svg>
         EMAIL
       </a>
-      <a href="https://linkedin.com" target="_blank" class="contact-btn">
+      <a href="https://linkedin.com/in/maria-rasmus-031581288" target="_blank" class="contact-btn">
         <svg class="contact-svg" viewBox="0 0 24 24">
           <path
             d="M19 0H5C2.239 0 0 2.239 0 5V19C0 21.761 2.239 24 5 24H19C21.761 24 24 21.761 24 19V5C24 2.239 21.761 0 19 0ZM8 19H5V8H8V19ZM6.5 6.732C5.534 6.732 4.75 5.942 4.75 4.968C4.75 3.994 5.534 3.204 6.5 3.204C7.466 3.204 8.25 3.994 8.25 4.968C8.25 5.942 7.466 6.732 6.5 6.732ZM20 19H17V13.396C17 10.028 13.5 10.283 13.5 13.396V19H10.5V8H13.5V9.765C14.862 7.502 20 7.339 20 12.062V19Z" />
         </svg>
         LINKEDIN
       </a>
-      <a href="https://github.com" target="_blank" class="contact-btn">
+      <a href="https://github.com/rasmusmaria26-cell" target="_blank" class="contact-btn">
         <svg class="contact-svg" viewBox="0 0 24 24">
           <path
             d="M12 0C5.373 0 0 5.373 0 12C0 17.302 3.438 21.8 8.207 23.387C8.806 23.498 9.028 23.126 9.028 22.81V20.673C5.688 21.398 4.983 19.066 4.983 19.066C4.437 17.678 3.646 17.309 3.646 17.309C2.553 16.562 3.731 16.577 3.731 16.577C4.941 16.663 5.58 17.822 5.58 17.822C6.654 19.664 8.406 19.132 9.052 18.825C9.162 18.093 9.444 17.562 9.756 17.258C7.092 16.954 4.294 15.923 4.294 11.2C4.294 9.855 4.774 8.756 5.556 7.89C5.43 7.587 5.006 6.333 5.676 4.606C5.676 4.606 6.706 4.276 9.016 5.842C9.995 5.57 11.037 5.434 12.066 5.428C13.094 5.434 14.135 5.57 15.116 5.842C17.424 4.276 18.452 4.606 18.452 4.606C19.124 6.333 18.701 7.587 18.575 7.89C19.358 8.756 19.836 9.855 19.836 11.2C19.836 15.936 17.034 16.95 14.364 17.248C14.755 17.587 15.105 18.256 15.105 19.31V22.81C15.105 23.13 15.323 23.504 15.932 23.385C20.697 21.798 24 17.3 24 12C24 5.373 18.627 0 12 0Z" />
@@ -1765,6 +2249,23 @@
         PHONE
       </a>
     </div>
+    <!-- Resume row — two buttons side by side, centered -->
+    <div class="resume-row reveal-item">
+      <a href="Maria_Rasmus.pdf" target="_blank" class="contact-btn resume-btn-view">
+        <svg class="contact-svg" viewBox="0 0 24 24">
+          <path
+            d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2ZM16 18H8V16H16V18ZM16 14H8V12H16V14ZM13 9V3.5L18.5 9H13Z" />
+        </svg>
+        VIEW RESUME
+      </a>
+      <a href="Maria_Rasmus.pdf" download="Maria_Rasmus_Resume.pdf" class="contact-btn resume-btn-dl">
+        <svg class="contact-svg" viewBox="0 0 24 24">
+          <path d="M19 9H15V3H9V9H5L12 16L19 9ZM5 18V20H19V18H5Z" />
+        </svg>
+        DOWNLOAD
+      </a>
+    </div>
+
     <div class="status-line reveal-item" id="contact-status"></div>
   </section>
 
@@ -1926,7 +2427,7 @@
 
     // Active Nav Observer
     const sections = document.querySelectorAll('.section-target, #hero');
-    const navLinks = document.querySelectorAll('.nav-links a, .mobile-nav-overlay a');
+    const navLinks = document.querySelectorAll('.side-nav-item, .mobile-nav-overlay a');
 
     const navObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1941,22 +2442,6 @@
     }, { threshold: 0.5 });
     sections.forEach(sec => navObserver.observe(sec));
 
-    // -- 10. MOBILE NAV TOGGLE --
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileNav = document.getElementById('mobile-nav');
-    const mobileNavBtns = document.querySelectorAll('.mobile-nav-overlay .nav-btn');
-
-    menuToggle.addEventListener('click', () => {
-      mobileNav.classList.toggle('open');
-      menuToggle.textContent = mobileNav.classList.contains('open') ? '✕' : '☰';
-    });
-
-    mobileNavBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        mobileNav.classList.remove('open');
-        menuToggle.textContent = '☰';
-      });
-    });
 
     // -- CONTACT STATUS TYPEWRITER --
     const contactStatus = document.getElementById('contact-status');
@@ -2005,7 +2490,7 @@
       });
     });
 
-    // -- NAME LETTER DROP ANIMATION (after boot) --
+    // -- NAME LETTER DROP ANIMATION (fires after boot completes ~8s) --
     function animateName() {
       const nameEl = document.getElementById('glitch-name');
       const name = 'MARIA RASMUS R';
@@ -2018,25 +2503,7 @@
         nameEl.appendChild(span);
       });
     }
-
-    // Patch boot sequence to trigger letter animation after reveal
-    const _origBoot = runBootSequence;
-    async function runBootSequence() {
-      await _origBoot();
-    }
-
-    // Override hero reveal to include letter animation
-    const origTimeout = window._heroTimeout;
-    // We patch directly: override bootOverlay hide callback
-    const _patch = () => {
-      const _boot = document.getElementById('boot-sequence');
-      if (!_boot || _boot.style.display === 'none') {
-        animateName();
-      } else {
-        setTimeout(_patch, 200);
-      }
-    };
-    setTimeout(_patch, 8000); // safely after boot completes
+    setTimeout(animateName, 8500);
 
     // Start Sequence
     window.addEventListener('DOMContentLoaded', () => {
@@ -2045,6 +2512,7 @@
       typeContactStatus();
     });
   </script>
+
 
 </body>
 
