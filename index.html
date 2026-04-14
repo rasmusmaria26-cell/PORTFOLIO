@@ -1,13 +1,1870 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>portfolio</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MARIA RASMUS R // OPERATIVE PROFILE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    /* CSS Variables */
+    :root {
+      --bg: #050810;
+      --bg-2: #0a0f1e;
+      --bg-3: #0f1729;
+      --teal: #00f5d4;
+      --teal-dim: #00b89e;
+      --amber: #ffb703;
+      --amber-dim: #cc9200;
+      --red: #ff3b3b;
+      --white: #f0f4ff;
+      --gray-1: #8892aa;
+      --gray-2: #3a4259;
+      --grid-line: rgba(0, 245, 212, 0.06);
+    }
+
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .space-font {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-2);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--teal);
+    }
+
+    /* Global Backgrounds */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      pointer-events: none;
+      background-size: 50px 50px;
+      background-image:
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+      animation: drift 40s linear infinite;
+    }
+
+    @keyframes drift {
+      from {
+        transform: translate(0, 0);
+      }
+
+      to {
+        transform: translate(-50px, -50px);
+      }
+    }
+
+    .bg-glow {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background: radial-gradient(circle at center top, rgba(0, 245, 212, 0.04) 0%, transparent 60%);
+    }
+
+    .bg-noise {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    #particle-canvas {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(5, 8, 16, 0.7);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-left .logo {
+      color: var(--teal);
+      font-weight: 700;
+      font-size: 1.2rem;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .nav-status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 10px;
+      color: var(--teal);
+      letter-spacing: 1px;
+    }
+
+    .dot-pulse {
+      width: 8px;
+      height: 8px;
+      background: var(--teal);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 245, 212, 0.4);
+      }
+
+      70% {
+        box-shadow: 0 0 0 6px rgba(0, 245, 212, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(0, 245, 212, 0);
+      }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 11px;
+      text-transform: uppercase;
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: 0.1em;
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 1px;
+      width: 0;
+      background: var(--teal);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .nav-links a.active {
+      color: var(--teal);
+      text-shadow: 0 0 10px rgba(0, 245, 212, 0.4);
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--teal);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Mobile Nav */
+    .mobile-nav-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 99;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      transform: translateY(-100%);
+      transition: transform 0.4s ease;
+    }
+
+    .mobile-nav-overlay.open {
+      transform: translateY(0);
+    }
+
+    .mobile-nav-overlay a {
+      font-size: 1.5rem;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 2px;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .mobile-nav-overlay a.active {
+      color: var(--teal);
+    }
+
+    /* Layout & Typography */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+      position: relative;
+      z-index: 20;
+    }
+
+    .section-label {
+      font-size: 11px;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--gray-2);
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: transform 1s ease;
+    }
+
+    .section-label.visible::after {
+      transform: scaleX(1);
+    }
+
+    /* Boot Sequence */
+    #boot-sequence {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2rem;
+      font-family: monospace;
+      color: var(--teal);
+      font-size: 14px;
+      line-height: 2;
+      transition: opacity 0.8s ease;
+    }
+
+    #terminal-output span {
+      display: block;
+      opacity: 0;
+      animation: fade-in 0.1s forwards;
+    }
+
+    @keyframes fade-in {
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Hero */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero-content {
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      transform: translateY(20px);
+      position: relative;
+      z-index: 20;
+    }
+
+    .hero-content.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .clearance-label {
+      font-size: 10px;
+      color: var(--gray-1);
+      letter-spacing: 0.3em;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .hero-name {
+      font-size: 72px;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .hero-name.glitch {
+      animation: glitch-anim 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+
+    @keyframes glitch-anim {
+      0% {
+        text-shadow: 3px 3px var(--teal), -3px -3px var(--amber);
+        transform: translate(2px, 2px);
+      }
+
+      20% {
+        text-shadow: -3px -3px var(--teal), 3px 3px var(--amber);
+        transform: translate(-2px, -2px);
+      }
+
+      40% {
+        text-shadow: 3px -3px var(--teal), -3px 3px var(--amber);
+        transform: translate(2px, -2px);
+      }
+
+      60% {
+        text-shadow: -3px 3px var(--teal), 3px -3px var(--amber);
+        transform: translate(-2px, 2px);
+      }
+
+      80% {
+        text-shadow: 3px 3px var(--teal), -3px -3px var(--amber);
+        transform: translate(2px, 2px);
+      }
+
+      100% {
+        text-shadow: 0 0 0;
+        transform: translate(0);
+      }
+    }
+
+    .hero-name:hover {
+      animation: glitch-anim 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+      cursor: default;
+    }
+
+    .tagline-container {
+      height: 24px;
+      margin-bottom: 4rem;
+    }
+
+    .tagline {
+      font-size: 16px;
+      color: var(--teal);
+    }
+
+    .tagline::after {
+      content: '█';
+      animation: blink 1s infinite;
+      margin-left: 4px;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-bottom: 4rem;
+    }
+
+    .btn {
+      padding: 1rem 2.5rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-radius: 4px;
+      letter-spacing: 1px;
+    }
+
+    .btn-primary {
+      background: var(--teal);
+      color: var(--bg);
+      border: 1px solid var(--teal);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 0 15px rgba(0, 245, 212, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--teal);
+      border: 1px solid var(--teal);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(0, 245, 212, 0.1);
+      box-shadow: 0 0 15px rgba(0, 245, 212, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: var(--gray-1);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .scroll-indicator svg {
+      color: var(--teal);
+      margin-top: 0.5rem;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(8px);
+      }
+    }
+
+    /* Section Overrides */
+    .reveal-item {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease;
+    }
+
+    .reveal-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Two Column Layouts */
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 3rem;
+    }
+
+    .grid-2col-even {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    /* Panels */
+    .panel {
+      background: var(--bg-2);
+      border: 1px solid var(--gray-2);
+      border-radius: 4px;
+      position: relative;
+    }
+
+    .panel-glow-teal {
+      box-shadow: 0 -1px 20px rgba(0, 245, 212, 0.15);
+      border-top: 1px solid var(--teal);
+    }
+
+    .mission-brief {
+      padding: 3rem;
+    }
+
+    .panel-header {
+      font-size: 10px;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--gray-2);
+      padding-bottom: 1rem;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .mission-brief p {
+      color: var(--gray-1);
+      margin-bottom: 3rem;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .signal-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .tag {
+      font-size: 10px;
+      color: var(--teal);
+      border: 1px solid var(--teal);
+      padding: 0.5rem 1rem;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+      background: var(--bg);
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    /* Spec Sheet */
+    .spec-sheet {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .spec-row {
+      display: flex;
+      align-items: center;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--gray-2);
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: all 0.4s ease;
+    }
+
+    .spec-row.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .spec-row:last-child {
+      border-bottom: none;
+    }
+
+    .spec-label {
+      width: 120px;
+      font-size: 10px;
+      color: var(--gray-1);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .spec-value {
+      font-size: 13px;
+      color: var(--white);
+    }
+
+    /* Timeline */
+    .timeline {
+      margin-top: 3rem;
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--gray-2);
+    }
+
+    .timeline-entry {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 5px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--teal);
+      transform: translateX(-3px);
+    }
+
+    .tl-year {
+      font-size: 11px;
+      color: var(--amber);
+      margin-bottom: 0.3rem;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .tl-title {
+      font-size: 13px;
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .tl-score {
+      font-size: 12px;
+      color: var(--gray-1);
+      margin-top: 0.2rem;
+    }
+
+    /* Deployments */
+    .intro-text {
+      color: var(--gray-1);
+      font-style: italic;
+      margin-bottom: 3rem;
+      font-size: 14px;
+    }
+
+    .hero-projects {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .project-card {
+      background: var(--bg-2);
+      border-radius: 4px;
+      padding: 3rem;
+      position: relative;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+      border: 1px solid var(--gray-2);
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .project-glow-teal {
+      box-shadow: 0 -1px 20px rgba(0, 245, 212, 0.1);
+      border-top: 1px solid var(--teal);
+    }
+
+    .project-glow-amber {
+      box-shadow: 0 -1px 20px rgba(255, 183, 3, 0.1);
+      border-top: 1px solid var(--amber);
+    }
+
+    .pc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 2rem;
+    }
+
+    .pc-codename {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .text-teal {
+      color: var(--teal);
+    }
+
+    .text-amber {
+      color: var(--amber);
+    }
+
+    .text-red {
+      color: var(--red);
+    }
+
+    .text-gray {
+      color: var(--gray-1);
+    }
+
+    .border-left-teal {
+      border-left: 3px solid var(--teal);
+    }
+
+    .border-left-red {
+      border-left: 3px solid var(--red);
+    }
+
+    .pc-status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .pc-status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      animation: blink 2s infinite;
+    }
+
+    .dot-teal {
+      background: var(--teal);
+      box-shadow: 0 0 5px var(--teal);
+    }
+
+    .dot-amber {
+      background: var(--amber);
+      box-shadow: 0 0 5px var(--amber);
+    }
+
+    .pc-title {
+      font-size: 28px;
+      color: var(--white);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .pc-subtitle {
+      font-size: 14px;
+      color: var(--gray-1);
+      margin-bottom: 2rem;
+    }
+
+    .divider-teal {
+      height: 1px;
+      background: rgba(0, 245, 212, 0.2);
+      margin-bottom: 2rem;
+    }
+
+    .divider-amber {
+      height: 1px;
+      background: rgba(255, 183, 3, 0.2);
+      margin-bottom: 2rem;
+    }
+
+    .pc-desc-list {
+      list-style: none;
+      margin-bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .pc-desc-item {
+      display: flex;
+      gap: 1rem;
+      font-size: 13px;
+      color: var(--gray-1);
+      line-height: 1.6;
+    }
+
+    .pc-desc-item span {
+      flex-shrink: 0;
+    }
+
+    .tag-amber {
+      border: 1px solid var(--amber);
+      color: var(--amber);
+    }
+
+    .tag-red {
+      border: 1px solid var(--red);
+      color: var(--red);
+    }
+
+    .pc-footer {
+      margin-top: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .pc-meter {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .meter-label {
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      margin-right: 0.5rem;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .meter-bar {
+      width: 12px;
+      height: 16px;
+      border-radius: 1px;
+    }
+
+    .mb-teal {
+      background: var(--teal);
+      box-shadow: 0 0 4px rgba(0, 245, 212, 0.4);
+    }
+
+    .mb-amber {
+      background: var(--amber);
+      box-shadow: 0 0 4px rgba(255, 183, 3, 0.4);
+    }
+
+    .secondary-projects {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .sp-card {
+      background: var(--bg-3);
+      padding: 2.5rem;
+      border-radius: 4px;
+      border: 1px solid var(--gray-2);
+      transition: all 0.3s ease;
+    }
+
+    .sp-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .sp-title {
+      font-size: 18px;
+      color: var(--white);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .sp-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 2rem;
+    }
+
+    /* Capabilities */
+    .cap-panel {
+      background: var(--bg-2);
+      border: 1px solid var(--gray-2);
+      border-radius: 4px;
+      padding: 3rem;
+    }
+
+    .cap-panel-header {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--gray-2);
+      padding-bottom: 1.5rem;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .cap-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      font-family: monospace;
+      font-size: 13px;
+    }
+
+    .cap-label {
+      width: 150px;
+      color: var(--white);
+    }
+
+    .cap-blocks {
+      letter-spacing: 2px;
+      flex: 1;
+      margin: 0 1.5rem;
+      color: var(--gray-2);
+    }
+
+    .cap-blocks .filled {
+      color: inherit;
+    }
+
+    .cap-level {
+      width: 90px;
+      text-align: right;
+      color: var(--gray-1);
+      font-size: 11px;
+    }
+
+    /* Mission Records */
+    .records-timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 0;
+    }
+
+    .records-timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      background: var(--gray-2);
+      transform: translateX(-50%);
+    }
+
+    .record-entry {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 4rem;
+      opacity: 0;
+      transition: all 0.6s ease;
+    }
+
+    .record-entry.from-left {
+      transform: translateX(-30px);
+    }
+
+    .record-entry.from-right {
+      transform: translateX(30px);
+    }
+
+    .record-entry.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .record-entry:nth-child(odd) {
+      flex-direction: row-reverse;
+    }
+
+    .record-date {
+      width: 45%;
+      text-align: right;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: monospace;
+    }
+
+    .record-entry:nth-child(odd) .record-date {
+      text-align: left;
+    }
+
+    .record-card {
+      width: 45%;
+      background: var(--bg-3);
+      border: 1px solid var(--gray-2);
+      padding: 2.5rem;
+      border-radius: 4px;
+      position: relative;
+    }
+
+    .record-card::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 33px;
+      height: 1px;
+      background: var(--gray-2);
+    }
+
+    .record-entry:nth-child(even) .record-card::after {
+      left: -34px;
+    }
+
+    .record-entry:nth-child(odd) .record-card::after {
+      right: -34px;
+    }
+
+    .record-dot {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--gray-1);
+      z-index: 2;
+      margin-top: 3px;
+    }
+
+    .record-entry.win .record-dot {
+      border-color: var(--teal);
+      box-shadow: 0 0 10px rgba(0, 245, 212, 0.6);
+    }
+
+    .record-class {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .record-title {
+      font-size: 16px;
+      color: var(--white);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .record-desc {
+      font-size: 13px;
+      color: var(--gray-1);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      font-size: 10px;
+      padding: 0.4rem 1rem;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    /* Open Channel */
+    #channel {
+      text-align: center;
+      padding: 8rem 0;
+    }
+
+    .radar-container {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 3rem auto;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .radar-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--teal);
+      border-radius: 50%;
+      position: relative;
+      z-index: 10;
+    }
+
+    .radar-ring {
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--teal);
+      border-radius: 50%;
+      animation: radar-ping 2.5s infinite ease-out;
+      opacity: 0;
+    }
+
+    .radar-ring:nth-child(2) {
+      animation-delay: 1.25s;
+    }
+
+    @keyframes radar-ping {
+      0% {
+        transform: scale(0.2);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+
+    .channel-heading {
+      font-size: 36px;
+      color: var(--white);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .channel-sub {
+      font-size: 14px;
+      color: var(--gray-1);
+      font-style: italic;
+      margin-bottom: 4rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      max-width: 500px;
+      margin: 0 auto 4rem auto;
+    }
+
+    .contact-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1.5rem;
+      background: var(--bg-2);
+      border: 1px solid var(--teal);
+      border-radius: 4px;
+      color: var(--white);
+      text-decoration: none;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .contact-btn:hover {
+      background: var(--teal);
+      color: var(--bg);
+    }
+
+    .contact-svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .status-line {
+      font-family: monospace;
+      font-size: 12px;
+      color: var(--gray-1);
+      height: 20px;
+    }
+
+    .status-typewriter {
+      border-right: 8px solid var(--teal);
+      display: inline-block;
+      padding-right: 4px;
+      animation: status-blink 1s infinite;
+    }
+
+    @keyframes status-blink {
+      50% {
+        border-color: transparent;
+      }
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--gray-2);
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: var(--gray-1);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .grid-2col,
+      .grid-2col-even,
+      .hero-projects,
+      .secondary-projects,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .records-timeline::before {
+        left: 0;
+      }
+
+      .record-entry {
+        flex-direction: column !important;
+        align-items: flex-start;
+        margin-bottom: 3rem;
+      }
+
+      .record-date {
+        width: 100%;
+        text-align: left !important;
+        margin-bottom: 1rem;
+        padding-left: 2rem;
+      }
+
+      .record-card {
+        width: 100%;
+        margin-left: 0;
+      }
+
+      .record-card::after {
+        display: none !important;
+      }
+
+      .record-dot {
+        left: 0;
+        transform: translateX(-5px);
+        margin-top: 25px;
+      }
+
+      .hero-name {
+        font-size: 40px;
+      }
+
+      .mission-brief {
+        padding: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HTML_PLACEHOLDER -->
+  <!-- Backgrounds -->
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+  <div class="bg-noise"></div>
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Boot Sequence -->
+  <div id="boot-sequence">
+    <div id="terminal-output"></div>
+  </div>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="mobile-nav-overlay" id="mobile-nav">
+    <a href="#profile" class="nav-btn">PROFILE</a>
+    <a href="#deployments" class="nav-btn">DEPLOYMENTS</a>
+    <a href="#capabilities" class="nav-btn">CAPABILITIES</a>
+    <a href="#records" class="nav-btn">RECORDS</a>
+    <a href="#channel" class="nav-btn">CHANNEL</a>
+  </div>
+
+  <nav>
+    <div class="nav-left">
+      <div class="logo">MR</div>
+      <div class="nav-status">
+        <div class="dot-pulse"></div> ONLINE
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#profile" class="nav-btn">PROFILE</a>
+      <a href="#deployments" class="nav-btn">DEPLOYMENTS</a>
+      <a href="#capabilities" class="nav-btn">CAPABILITIES</a>
+      <a href="#records" class="nav-btn">RECORDS</a>
+      <a href="#channel" class="nav-btn">CHANNEL</a>
+    </div>
+    <button class="hamburger" id="menu-toggle">☰</button>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero" class="container">
+    <div class="hero-content" id="hero-content">
+      <div class="clearance-label">OPERATIVE // CLEARANCE LEVEL: ENGINEER</div>
+      <div class="hero-name" id="glitch-name">MARIA RASMUS R</div>
+      <div class="tagline-container">
+        <span class="tagline" id="tagline-typist"></span>
+      </div>
+      <div class="cta-group">
+        <a href="#deployments" class="btn btn-primary nav-btn">VIEW DEPLOYMENTS</a>
+        <a href="#channel" class="btn btn-secondary nav-btn">OPEN CHANNEL</a>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      SCROLL TO DECRYPT<br>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </div>
+  </section>
+
+  <!-- PROFILE -->
+  <section id="profile" class="container section-target">
+    <div class="section-label reveal-item">// 01 — OPERATIVE PROFILE</div>
+    <div class="grid-2col">
+      <div class="panel panel-glow-teal reveal-item">
+        <div class="mission-brief">
+          <div class="panel-header">MISSION BRIEF</div>
+          <p>CS undergraduate who gravitates toward the hard problems — built an encrypted offline mesh network from
+            scratch, ran face recognition entirely on-device, and shipped a full booking platform end to end. Learns by
+            breaking things and rebuilding them better. Targeting Android and full-stack roles where there's real
+            engineering to figure out.</p>
+          <div class="signal-tags">
+            <span class="tag">ANDROID ENGINEERING</span>
+            <span class="tag">FULL-STACK</span>
+            <span class="tag">SYSTEMS PROGRAMMING</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="spec-sheet">
+          <div class="spec-row reveal-item">
+            <div class="spec-label">DESIGNATION</div>
+            <div class="spec-value">Maria Rasmus R</div>
+          </div>
+          <div class="spec-row reveal-item">
+            <div class="spec-label">LOCATION</div>
+            <div class="spec-value">Thoothukudi, Tamil Nadu</div>
+          </div>
+          <div class="spec-row reveal-item">
+            <div class="spec-label">INSTITUTION</div>
+            <div class="spec-value">Kalasalingam Academy of Research and Education</div>
+          </div>
+          <div class="spec-row reveal-item">
+            <div class="spec-label">FIELD</div>
+            <div class="spec-value">Computer Science Engineering</div>
+          </div>
+          <div class="spec-row reveal-item">
+            <div class="spec-label">STATUS</div>
+            <div class="spec-value">Undergraduate — 2022 to Present</div>
+          </div>
+          <div class="spec-row reveal-item">
+            <div class="spec-label">CLEARANCE</div>
+            <div class="spec-value">CGPA 7.65 / 10</div>
+          </div>
+          <div class="spec-row reveal-item">
+            <div class="spec-label">LANGUAGES</div>
+            <div class="spec-value">Tamil · English</div>
+          </div>
+        </div>
+        <div class="timeline reveal-item">
+          <div class="timeline-entry">
+            <div class="tl-year">2022 – PRESENT</div>
+            <div class="tl-title">B.TECH — COMPUTER SCIENCE</div>
+            <div class="tl-score">CGPA: 7.65</div>
+          </div>
+          <div class="timeline-entry">
+            <div class="tl-year">2021 – 2022</div>
+            <div class="tl-title">CLASS XII — HSC</div>
+            <div class="tl-score">ST. Thomas Matriculation · 71%</div>
+          </div>
+          <div class="timeline-entry">
+            <div class="tl-year">2019 – 2020</div>
+            <div class="tl-title">CLASS X — SSLC</div>
+            <div class="tl-score">ST. Thomas Matriculation · 74%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPLOYMENTS -->
+  <section id="deployments" class="container section-target">
+    <div class="section-label reveal-item" style="color:var(--amber)">// 02 — ACTIVE DEPLOYMENTS</div>
+    <div class="intro-text reveal-item">Four systems built. Two flagship. All ship.</div>
+    <div class="hero-projects">
+      <!-- OffGrid -->
+      <div class="project-card project-glow-teal reveal-item">
+        <div class="pc-header">
+          <div class="pc-codename text-teal">OFFGRID</div>
+          <div class="pc-status text-teal">
+            <div class="pc-status-dot dot-teal"></div> DEPLOYED
+          </div>
+        </div>
+        <div class="pc-title">OFFGRID</div>
+        <div class="pc-subtitle">Decentralized Mesh Messaging — Zero Internet Required</div>
+        <div class="divider-teal"></div>
+        <ul class="pc-desc-list">
+          <li class="pc-desc-item"><span class="text-teal">▸</span> DUAL TRANSPORT — BLE discovery + Wi-Fi Aware
+            delivery. Epidemic routing. SHA-256 deduplication.</li>
+          <li class="pc-desc-item"><span class="text-teal">▸</span> ENCRYPTION — Hybrid RSA-2048 + AES-256/CBC. Local
+            keypairs. QR fingerprint identity verification.</li>
+          <li class="pc-desc-item"><span class="text-teal">▸</span> SOS BROADCAST — Boosted TTL (15 hops). Haptic +
+            full-screen alerts across all mesh devices.</li>
+        </ul>
+        <div class="signal-tags" style="margin-bottom: 2rem;">
+          <span class="tag">KOTLIN</span><span class="tag">JETPACK COMPOSE</span><span class="tag">MVVM</span><span
+            class="tag">ROOM DB</span><span class="tag">CAMERAXML</span>
+        </div>
+        <div class="pc-footer">
+          <div class="pc-meter">
+            <span class="meter-label text-teal">SIGNAL STRENGTH</span>
+            <div class="meter-bar mb-teal"></div>
+            <div class="meter-bar mb-teal"></div>
+            <div class="meter-bar mb-teal"></div>
+            <div class="meter-bar mb-teal"></div>
+            <div class="meter-bar mb-teal"></div>
+          </div>
+          <div class="meter-label text-teal">ENCRYPTION: ACTIVE</div>
+        </div>
+      </div>
+      <!-- Servify -->
+      <div class="project-card project-glow-amber reveal-item">
+        <div class="pc-header">
+          <div class="pc-codename text-amber">SERVIFY</div>
+          <div class="pc-status text-amber">
+            <div class="pc-status-dot dot-amber"></div> DEPLOYED
+          </div>
+        </div>
+        <div class="pc-title">SERVIFY</div>
+        <div class="pc-subtitle">Electronic Service Aggregation Platform — Android</div>
+        <div class="divider-amber"></div>
+        <ul class="pc-desc-list">
+          <li class="pc-desc-item"><span class="text-amber">▸</span> 2-ROLE SYSTEM — Customer + Vendor app. Compare
+            verified repair vendors by price, rating, and service category.</li>
+          <li class="pc-desc-item"><span class="text-amber">▸</span> BOOKING ENGINE — 4-step flow with real-time status
+            tracking, scheduled date/time selection, vendor matching by category.</li>
+          <li class="pc-desc-item"><span class="text-amber">▸</span> VENDOR PROFILES — KYC verification, service radius,
+            hourly rate, job history tracking.</li>
+        </ul>
+        <div class="signal-tags" style="margin-bottom: 2rem;">
+          <span class="tag tag-amber">KOTLIN</span><span class="tag tag-amber">SUPABASE</span><span
+            class="tag tag-amber">HILT</span><span class="tag tag-amber">JETPACK COMPOSE</span><span
+            class="tag tag-amber">MVVM</span>
+        </div>
+        <div class="pc-footer">
+          <div class="pc-meter">
+            <span class="meter-label text-amber">UPTIME</span>
+            <div class="meter-bar mb-amber"></div>
+            <div class="meter-bar mb-amber"></div>
+            <div class="meter-bar mb-amber"></div>
+            <div class="meter-bar mb-amber"></div>
+            <div class="meter-bar mb-amber"></div>
+          </div>
+          <div class="meter-label text-amber">STATUS: LIVE</div>
+        </div>
+      </div>
+    </div>
+    <!-- Secondary -->
+    <div class="secondary-projects">
+      <div class="sp-card border-left-teal reveal-item">
+        <div class="pc-codename text-teal" style="margin-bottom: 1rem;">IRONFACE</div>
+        <div class="sp-title">AI Gym Attendance — On-Device Inference</div>
+        <div class="pc-desc-item" style="margin-bottom: 0.5rem;"><span class="text-teal">▸</span> Real-time SSD
+          MobileNetV1 face recognition parsing 128-D descriptors.</div>
+        <div class="pc-desc-item"><span class="text-teal">▸</span> 100% local WASM processing. Zero patient data enters
+          the cloud.</div>
+        <div class="sp-tags">
+          <span class="tag">TENSORFLOW.JS</span><span class="tag">FACE-API.JS</span><span class="tag">WASM</span><span
+            class="tag">NODE.JS</span>
+        </div>
+      </div>
+      <div class="sp-card border-left-red reveal-item">
+        <div class="pc-codename text-red" style="margin-bottom: 1rem;">PHISHGUARD</div>
+        <div class="sp-title">AI Phishing Detection — Chrome Extension</div>
+        <div class="pc-desc-item" style="margin-bottom: 0.5rem;"><span class="text-red">▸</span> Scans URLs using
+          heuristic analysis, visual DOM checks, and NLP models.</div>
+        <div class="pc-desc-item"><span class="text-red">▸</span> Intercepts and warns users before executing malicious
+          payloads.</div>
+        <div class="sp-tags">
+          <span class="tag tag-red">NLP</span><span class="tag tag-red">HEURISTIC SCANNING</span><span
+            class="tag tag-red">EXTENSION</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPABILITIES -->
+  <section id="capabilities" class="container section-target">
+    <div class="section-label reveal-item" style="color:var(--white)">// 03 — SYSTEM CAPABILITIES</div>
+    <div class="grid-2col-even">
+      <div class="cap-panel reveal-item">
+        <div class="cap-panel-header text-teal">PRIMARY SYSTEMS</div>
+        <div class="cap-row text-teal"><span class="cap-label">KOTLIN</span><span class="cap-blocks" data-fill="12"
+            data-color="var(--teal)"></span><span class="cap-level">EXPERT</span></div>
+        <div class="cap-row text-teal"><span class="cap-label">PYTHON</span><span class="cap-blocks" data-fill="10"
+            data-color="var(--teal)"></span><span class="cap-level">ADVANCED</span></div>
+        <div class="cap-row text-teal"><span class="cap-label">JAVASCRIPT</span><span class="cap-blocks" data-fill="9"
+            data-color="var(--teal)"></span><span class="cap-level">ADVANCED</span></div>
+        <div class="cap-row text-teal"><span class="cap-label">JAVA</span><span class="cap-blocks" data-fill="8"
+            data-color="var(--teal)"></span><span class="cap-level">PROFICIENT</span></div>
+      </div>
+      <div class="cap-panel reveal-item">
+        <div class="cap-panel-header text-amber">ANDROID SUBSYSTEMS</div>
+        <div class="cap-row text-amber"><span class="cap-label">JETPACK COMPOSE</span><span class="cap-blocks"
+            data-fill="12" data-color="var(--amber)"></span><span class="cap-level">EXPERT</span></div>
+        <div class="cap-row text-amber"><span class="cap-label">MVVM + STATEFLOW</span><span class="cap-blocks"
+            data-fill="11" data-color="var(--amber)"></span><span class="cap-level">EXPERT</span></div>
+        <div class="cap-row text-amber"><span class="cap-label">ROOM DB + HILT</span><span class="cap-blocks"
+            data-fill="10" data-color="var(--amber)"></span><span class="cap-level">ADVANCED</span></div>
+        <div class="cap-row text-amber"><span class="cap-label">CAMERAXML/MLKIT</span><span class="cap-blocks"
+            data-fill="9" data-color="var(--amber)"></span><span class="cap-level">ADVANCED</span></div>
+      </div>
+      <div class="cap-panel reveal-item">
+        <div class="cap-panel-header text-teal" style="filter: brightness(0.8);">SECURITY PROTOCOLS</div>
+        <div class="cap-row text-teal"><span class="cap-label">CRYPTOGRAPHY</span><span class="cap-blocks"
+            data-fill="11" data-color="var(--teal)"></span><span class="cap-level">ADVANCED</span></div>
+        <div class="cap-row text-teal"><span class="cap-label">MESH NETWORKING</span><span class="cap-blocks"
+            data-fill="12" data-color="var(--teal)"></span><span class="cap-level">EXPERT</span></div>
+        <div class="cap-row text-teal"><span class="cap-label">ETHICAL HACKING</span><span class="cap-blocks"
+            data-fill="9" data-color="var(--teal)"></span><span class="cap-level">CERTIFIED</span></div>
+        <div class="cap-row text-teal"><span class="cap-label">CTF / OFFENSIVE</span><span class="cap-blocks"
+            data-fill="10" data-color="var(--teal)"></span><span class="cap-level">ADVANCED</span></div>
+      </div>
+      <div class="cap-panel reveal-item">
+        <div class="cap-panel-header text-gray">DEPLOYMENT TOOLS</div>
+        <div class="cap-row text-gray"><span class="cap-label">ANDROID STUDIO</span><span class="cap-blocks"
+            data-fill="12" data-color="var(--gray-1)"></span><span class="cap-level">EXPERT</span></div>
+        <div class="cap-row text-gray"><span class="cap-label">GIT</span><span class="cap-blocks" data-fill="10"
+            data-color="var(--gray-1)"></span><span class="cap-level">ADVANCED</span></div>
+        <div class="cap-row text-gray"><span class="cap-label">API INTEGRATION</span><span class="cap-blocks"
+            data-fill="9" data-color="var(--gray-1)"></span><span class="cap-level">ADVANCED</span></div>
+        <div class="cap-row text-gray"><span class="cap-label">SUPABASE</span><span class="cap-blocks" data-fill="8"
+            data-color="var(--gray-1)"></span><span class="cap-level">PROFICIENT</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECORDS -->
+  <section id="records" class="container section-target">
+    <div class="section-label reveal-item" style="color:var(--gray-1)">// 04 — MISSION RECORDS</div>
+    <div class="records-timeline">
+      <div class="record-entry win from-left">
+        <div class="record-dot"></div>
+        <div class="record-date text-teal">2026</div>
+        <div class="record-card border-left-teal">
+          <div class="record-class text-teal">HACKATHON // ACIC-KIF 2026</div>
+          <div class="record-title">OPERATION OFFGRID — FIRST PLACE</div>
+          <div class="record-desc">Shipped production-grade offline mesh communication in 48 hours. Real encryption.
+            Real routing. Real hardware. Zero internet. Zero servers.</div>
+          <div class="record-badge"
+            style="background: rgba(0,245,212,0.1); color: var(--teal); border: 1px solid var(--teal);">★ WINNER</div>
+        </div>
+      </div>
+      <div class="record-entry win from-right">
+        <div class="record-dot"></div>
+        <div class="record-date text-teal">2024</div>
+        <div class="record-card border-left-teal">
+          <div class="record-class text-teal">CTF // IBM COMPETITION 2024</div>
+          <div class="record-title">CRYPTOGRAPHY & NETWORKING BREACH — FIRST PLACE</div>
+          <div class="record-desc">Solved real-time cybersecurity challenges in cryptography and networking.
+            Kalasalingam University.</div>
+          <div class="record-badge"
+            style="background: rgba(0,245,212,0.1); color: var(--teal); border: 1px solid var(--teal);">★ WINNER</div>
+        </div>
+      </div>
+      <div class="record-entry from-left">
+        <div class="record-dot" style="border-color: var(--amber);"></div>
+        <div class="record-date text-amber">2024</div>
+        <div class="record-card" style="border-left: 3px solid var(--amber);">
+          <div class="record-class text-amber">CERTIFICATION // CISCO 2024</div>
+          <div class="record-title">ETHICAL HACKER CERTIFICATION</div>
+          <div class="record-desc">Completed 70-hour program in offensive security and vulnerability detection. Cisco
+            Networking Academy.</div>
+          <div class="record-badge text-amber" style="border: 1px solid var(--amber);">CERTIFIED</div>
+        </div>
+      </div>
+      <div class="record-entry from-right">
+        <div class="record-dot"></div>
+        <div class="record-date text-gray">2023</div>
+        <div class="record-card" style="border-left: 3px solid var(--gray-1);">
+          <div class="record-class text-gray">COMPETITION // EUPHORIA 2023</div>
+          <div class="record-title">GAME DEVELOPMENT — RUNNER UP</div>
+          <div class="record-desc">Interactive game prototype recognized for creativity and design.</div>
+          <div class="record-badge text-gray" style="border: 1px solid var(--gray-1);">2ND PLACE</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPEN CHANNEL -->
+  <section id="channel" class="container section-target">
+    <div class="section-label reveal-item" style="justify-content: center; margin-bottom: 3rem;">// 05 — OPEN CHANNEL
+    </div>
+    <div class="radar-container reveal-item">
+      <div class="radar-dot"></div>
+      <div class="radar-ring"></div>
+      <div class="radar-ring"></div>
+    </div>
+    <div class="channel-heading space-font reveal-item">ESTABLISH CONNECTION</div>
+    <div class="channel-sub reveal-item">Currently looking for the next hard problem.</div>
+    <div class="contact-grid reveal-item">
+      <a href="mailto:rasmusmaria26@gmail.com" class="contact-btn">
+        <svg class="contact-svg" viewBox="0 0 24 24">
+          <path
+            d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6ZM20 6L12 11L4 6H20ZM20 18H4V8L12 13L20 8V18Z" />
+        </svg>
+        EMAIL
+      </a>
+      <a href="https://linkedin.com" target="_blank" class="contact-btn">
+        <svg class="contact-svg" viewBox="0 0 24 24">
+          <path
+            d="M19 0H5C2.239 0 0 2.239 0 5V19C0 21.761 2.239 24 5 24H19C21.761 24 24 21.761 24 19V5C24 2.239 21.761 0 19 0ZM8 19H5V8H8V19ZM6.5 6.732C5.534 6.732 4.75 5.942 4.75 4.968C4.75 3.994 5.534 3.204 6.5 3.204C7.466 3.204 8.25 3.994 8.25 4.968C8.25 5.942 7.466 6.732 6.5 6.732ZM20 19H17V13.396C17 10.028 13.5 10.283 13.5 13.396V19H10.5V8H13.5V9.765C14.862 7.502 20 7.339 20 12.062V19Z" />
+        </svg>
+        LINKEDIN
+      </a>
+      <a href="https://github.com" target="_blank" class="contact-btn">
+        <svg class="contact-svg" viewBox="0 0 24 24">
+          <path
+            d="M12 0C5.373 0 0 5.373 0 12C0 17.302 3.438 21.8 8.207 23.387C8.806 23.498 9.028 23.126 9.028 22.81V20.673C5.688 21.398 4.983 19.066 4.983 19.066C4.437 17.678 3.646 17.309 3.646 17.309C2.553 16.562 3.731 16.577 3.731 16.577C4.941 16.663 5.58 17.822 5.58 17.822C6.654 19.664 8.406 19.132 9.052 18.825C9.162 18.093 9.444 17.562 9.756 17.258C7.092 16.954 4.294 15.923 4.294 11.2C4.294 9.855 4.774 8.756 5.556 7.89C5.43 7.587 5.006 6.333 5.676 4.606C5.676 4.606 6.706 4.276 9.016 5.842C9.995 5.57 11.037 5.434 12.066 5.428C13.094 5.434 14.135 5.57 15.116 5.842C17.424 4.276 18.452 4.606 18.452 4.606C19.124 6.333 18.701 7.587 18.575 7.89C19.358 8.756 19.836 9.855 19.836 11.2C19.836 15.936 17.034 16.95 14.364 17.248C14.755 17.587 15.105 18.256 15.105 19.31V22.81C15.105 23.13 15.323 23.504 15.932 23.385C20.697 21.798 24 17.3 24 12C24 5.373 18.627 0 12 0Z" />
+        </svg>
+        GITHUB
+      </a>
+      <a href="tel:7010378334" class="contact-btn">
+        <svg class="contact-svg" viewBox="0 0 24 24">
+          <path
+            d="M6.62 10.79A15.05 15.05 0 0 0 13.21 17.38L15.41 15.18C15.68 14.91 16.08 14.82 16.43 14.94C17.55 15.31 18.76 15.51 20 15.51C20.55 15.51 21 15.96 21 16.51V20C21 20.55 20.55 21 20 21C10.06 21 2 12.94 2 3C2 2.45 2.45 2 3 2H6.5C7.05 2 7.5 2.45 7.5 3C7.5 4.24 7.7 5.45 8.07 6.57C8.18 6.92 8.1 7.32 7.82 7.59L5.62 9.79Z" />
+        </svg>
+        PHONE
+      </a>
+    </div>
+    <div class="status-line reveal-item" id="contact-status"></div>
+  </section>
+
+  <footer>
+    <div>MARIA RASMUS R // THOOTHUKUDI, TN // 2026</div>
+    <div class="nav-status">SIGNAL ACTIVE <div class="dot-pulse" style="display:inline-block; margin-left:4px;"></div>
+    </div>
+  </footer>
+  <script>
+    // -- 1 & 8. BOOT SEQUENCE & PAGE TRANSITION --
+    const bootLines = [
+      { t: "[SYSTEM ALERT]...............", d: 400 },
+      { t: "Global network failure detected.", d: 600 },
+      { t: "Initializing decentralized mesh protocol...", d: 800 },
+      { t: "Scanning for active nodes...", d: 600 },
+      { t: "......", d: 500 },
+      { t: "NODE FOUND — THOOTHUKUDI, TN", d: 500 },
+      { t: "Establishing encrypted peer-to-peer link...", d: 700 },
+      { t: "RSA-2048 handshake complete.", d: 400 },
+      { t: "AES-256 channel secured.", d: 400 },
+      { t: "......", d: 500 },
+      { t: "CONNECTION ESTABLISHED", d: 800 },
+      { t: "[LOADING OPERATIVE PROFILE]", d: 500 }
+    ];
+
+    const terminal = document.getElementById('terminal-output');
+    const bootOverlay = document.getElementById('boot-sequence');
+    const heroContent = document.getElementById('hero-content');
+    const glitchName = document.getElementById('glitch-name');
+
+    async function runBootSequence() {
+      await new Promise(r => setTimeout(r, 400)); // Initial pause
+      for (const line of bootLines) {
+        const el = document.createElement('span');
+        el.textContent = line.t;
+        terminal.appendChild(el);
+        await new Promise(r => setTimeout(r, line.d));
+      }
+
+      bootOverlay.style.opacity = '0';
+      setTimeout(() => {
+        bootOverlay.style.display = 'none';
+        heroContent.classList.add('visible');
+        // -- 3. GLITCH ON LOAD --
+        glitchName.classList.add('glitch');
+        setTimeout(() => glitchName.classList.remove('glitch'), 400); // Remove after 1 iteration
+      }, 800);
+    }
+
+    // -- 6. TYPEWRITER CYCLING --
+    const taglines = [
+      "Builds encrypted networks from scratch.",
+      "Runs AI entirely on-device. No cloud.",
+      "Ships full-stack Android. End to end.",
+      "Learns by breaking things. Rebuilds better.",
+      "Zero internet. Zero servers. Just code."
+    ];
+    const typist = document.getElementById('tagline-typist');
+    let lineIdx = 0, charIdx = 0, isDeleting = false;
+
+    function typeTagline() {
+      const currentLine = taglines[lineIdx];
+
+      if (isDeleting) {
+        typist.textContent = currentLine.substring(0, charIdx - 1);
+        charIdx--;
+      } else {
+        typist.textContent = currentLine.substring(0, charIdx + 1);
+        charIdx++;
+      }
+
+      let typeSpeed = isDeleting ? 20 : 40;
+
+      if (!isDeleting && charIdx === currentLine.length) {
+        typeSpeed = 2000; // Pause at end of line
+        isDeleting = true;
+      } else if (isDeleting && charIdx === 0) {
+        isDeleting = false;
+        lineIdx = (lineIdx + 1) % taglines.length;
+        typeSpeed = 500; // Pause before new line
+      }
+
+      setTimeout(typeTagline, typeSpeed);
+    }
+
+    // -- 2. PARTICLE FIELD CANVAS --
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function initCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      particles = [];
+      for (let i = 0; i < 35; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 2 + 1,
+          speedY: (Math.random() * 0.5 + 0.2) * -1, // moves up
+          opacity: Math.random() * 0.3 + 0.2
+        });
+      }
+    }
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let p of particles) {
+        ctx.fillStyle = `rgba(0, 245, 212, ${p.opacity})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+
+        p.y += p.speedY;
+        if (p.y < -10) p.y = canvas.height + 10;
+      }
+      requestAnimationFrame(drawParticles);
+    }
+    window.addEventListener('resize', initCanvas);
+    initCanvas();
+    drawParticles();
+
+    // -- 4 & 5. INTERSECTION OBSERVERS (SCROLL ANIMATIONS & ACTIVE NAV) --
+    const revealItems = document.querySelectorAll('.reveal-item');
+    const specRows = document.querySelectorAll('.spec-row');
+    const capBlocks = document.querySelectorAll('.cap-blocks');
+    const tlEntries = document.querySelectorAll('.record-entry');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+
+          // Handle Spec Rows (Staggered)
+          if (entry.target.classList.contains('spec-row')) {
+            const idx = Array.from(specRows).indexOf(entry.target);
+            entry.target.style.transitionDelay = `${(idx % 7) * 60}ms`;
+          }
+
+          // Handle Capability Blocks (Left to Right Fill)
+          if (entry.target.classList.contains('cap-panel')) {
+            const blocksBoxes = entry.target.querySelectorAll('.cap-blocks');
+            blocksBoxes.forEach(box => {
+              const fillCount = parseInt(box.getAttribute('data-fill'));
+              const color = box.getAttribute('data-color');
+              let html = '';
+              for (let i = 0; i < 14; i++) {
+                if (i < fillCount) html += `<span style="color:${color}" class="filled">█</span>`;
+                else html += `░`;
+              }
+              box.innerHTML = html;
+            });
+          }
+        }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+    revealItems.forEach(item => revealObserver.observe(item));
+    tlEntries.forEach(item => revealObserver.observe(item));
+
+    // Active Nav Observer
+    const sections = document.querySelectorAll('.section-target, #hero');
+    const navLinks = document.querySelectorAll('.nav-links a, .mobile-nav-overlay a');
+
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${id}`) link.classList.add('active');
+          });
+        }
+      });
+    }, { threshold: 0.5 });
+    sections.forEach(sec => navObserver.observe(sec));
+
+    // -- 10. MOBILE NAV TOGGLE --
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    const mobileNavBtns = document.querySelectorAll('.mobile-nav-overlay .nav-btn');
+
+    menuToggle.addEventListener('click', () => {
+      mobileNav.classList.toggle('open');
+      menuToggle.textContent = mobileNav.classList.contains('open') ? '✕' : '☰';
+    });
+
+    mobileNavBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+        menuToggle.textContent = '☰';
+      });
+    });
+
+    // -- CONTACT STATUS TYPEWRITER --
+    const contactStatus = document.getElementById('contact-status');
+    const contactText = "▸ SIGNAL CLEAR. ENCRYPTION ACTIVE. AWAITING RESPONSE...";
+    let cIdx = 0;
+    function typeContactStatus() {
+      if (cIdx < contactText.length) {
+        contactStatus.innerHTML = `<span class="status-typewriter">${contactText.substring(0, cIdx + 1)}</span>`;
+        cIdx++;
+        setTimeout(typeContactStatus, 50);
+      } else {
+        setTimeout(() => { cIdx = 0; typeContactStatus(); }, 5000); // loop
+      }
+    }
+
+    // Start Sequence
+    window.addEventListener('DOMContentLoaded', () => {
+      runBootSequence();
+      typeTagline();
+      typeContactStatus();
+    });
+  </script>
+</body>
+
 </html>
