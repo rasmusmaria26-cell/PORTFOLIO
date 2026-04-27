@@ -19,7 +19,11 @@ export default function Hero() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          video.src = '/pixel-hero.mp4'
+          // Set src on each source element so the browser picks WebM first
+          const sources = video.querySelectorAll('source')
+          sources.forEach(s => {
+            if (!s.src) s.src = s.getAttribute('data-src') || ''
+          })
           video.load()
           video.play().catch(() => {})
           observer.disconnect()
@@ -73,10 +77,14 @@ export default function Hero() {
           muted
           playsInline
           preload="none"
+          poster="/pixel-hero-poster.webp"
           className="w-full h-full object-cover object-center md:object-left"
           style={{ opacity: 0.5 }}
           aria-label="Pixel art coding scene"
-        />
+        >
+          <source data-src="/pixel-hero.webm" type="video/webm" />
+          <source data-src="/pixel-hero.mp4" type="video/mp4" />
+        </video>
       </div>
 
       {/* Hero text — flows right under video on mobile, pinned bottom-left on desktop */}

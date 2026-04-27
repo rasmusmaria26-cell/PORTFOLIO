@@ -12,26 +12,26 @@ const projects: Project[] = [
   {
     id: '01', badge: 'CLIENT · WEB', title: 'Zeyanne Marine Pvt. Ltd.',
     description: 'Corporate web presence for a marine spare parts shipping company. Blueprint canvas hero, pinned scroll reveal, hero video background, WhatsApp integration.',
-    tags: ['React', 'GSAP', 'Tailwind', 'Canvas API'], image: '/screenshots/zeyanne.jpg',
-    accent: '#4DFFD2', link: '#', linkLabel: 'Live Site ↗',
+    tags: ['React', 'GSAP', 'Tailwind', 'Canvas API'], image: '/screenshots/zeyanne.webp',
+    accent: '#4DFFD2', link: 'https://zeyannemarine.com/', linkLabel: 'Live Site ↗',
   },
   {
     id: '02', badge: 'DEMO · RESTAURANT', title: 'Saffron & Sea',
     description: 'Fine dining concept site. Cinematic particle field hero, luxury serif typography, coastal restaurant brand identity.',
-    tags: ['HTML', 'CSS', 'GSAP', 'Canvas Particles'], image: '/screenshots/saffron.jpg',
-    accent: '#FF4DFF', link: '#', linkLabel: 'View Demo ↗',
+    tags: ['HTML', 'CSS', 'GSAP', 'Canvas Particles'], image: '/screenshots/saffron.webp',
+    accent: '#FF4DFF', link: 'https://demo-res-sage.vercel.app/', linkLabel: 'View Demo ↗',
   },
   {
     id: '03', badge: 'HACKATHON · ANDROID · 1ST PLACE', title: 'OffGrid — Mesh Messenger',
     description: 'Encrypted offline mesh communication. Bluetooth LE discovery, Wi-Fi Aware delivery, RSA-2048 + AES-256 encryption. Won ACIC-KIF Hackathon 2026. Zero internet. Zero servers.',
-    tags: ['Kotlin', 'Jetpack Compose', 'Bluetooth LE', 'Wi-Fi Aware', 'Cryptography'], image: '/screenshots/offgrid.jpg',
-    accent: '#4DFFD2', link: '#', linkLabel: 'GitHub ↗',
+    tags: ['Kotlin', 'Jetpack Compose', 'Bluetooth LE', 'Wi-Fi Aware', 'Cryptography'], image: '/screenshots/offgrid.webp',
+    accent: '#4DFFD2', link: 'https://github.com/rasmusmaria26-cell/offgrid-v2.git', linkLabel: 'GitHub ↗',
   },
   {
     id: '04', badge: 'PRODUCT · ANDROID', title: 'Servify — Service Aggregator',
     description: 'Two-role Android app to compare verified repair vendors by price and rating. Four-step booking flow, real-time status tracking, KYC vendor verification.',
-    tags: ['Kotlin', 'Jetpack Compose', 'Supabase', 'Hilt', 'MVVM'], image: '/screenshots/servify.jpg',
-    accent: '#4DFFD2', link: '#', linkLabel: 'GitHub ↗',
+    tags: ['Kotlin', 'Jetpack Compose', 'Supabase', 'Hilt', 'MVVM'], image: '/screenshots/servify.webp',
+    accent: '#4DFFD2', link: 'https://github.com/rasmusmaria26-cell/Servifyapp-clean-.git', linkLabel: 'GitHub ↗',
   },
 ]
 
