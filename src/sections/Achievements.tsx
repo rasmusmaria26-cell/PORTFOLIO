@@ -3,22 +3,22 @@ import { motion } from 'framer-motion'
 import { useCursor } from '@/context/CursorContext'
 
 interface Achievement {
-  emoji: string; place: string; title: string; description: string; accent: string
+  place: string; title: string; description: string; accent: string
 }
 
 const achievements: Achievement[] = [
   {
-    emoji: '🏆', place: '1ST PLACE', title: 'ACIC-KIF Hackathon 2026',
+    place: '1ST PLACE', title: 'ACIC-KIF Hackathon 2026',
     description: 'Shipped OffGrid in 48 hours. Encrypted offline mesh communication. Real hardware, real encryption, zero internet.',
     accent: '#4DFFD2',
   },
   {
-    emoji: '🔐', place: '1ST PLACE', title: 'IBM CTF Competition',
+    place: '1ST PLACE', title: 'IBM CTF Competition',
     description: 'Solved real-time cybersecurity challenges in cryptography and networking at Kalasalingam University.',
     accent: '#4DFFD2',
   },
   {
-    emoji: '🎮', place: '2ND PLACE', title: 'Game Dev Competition',
+    place: '2ND PLACE', title: 'Game Dev Competition',
     description: 'Interactive game prototype recognised for creativity and design at Euphoria 2023, Kalasalingam University.',
     accent: '#FF4DFF',
   },
@@ -57,7 +57,7 @@ export default function Achievements() {
   const { setVariant } = useCursor()
 
   return (
-    <section id="achievements" className="py-20 md:py-[120px] px-6 md:px-12" style={{ background: 'var(--surface)' }}>
+    <section id="achievements" className="py-20 md:py-[120px] px-6 md:px-12">
       <div className="max-w-[1200px] mx-auto">
         <p className="font-mono text-[11px] tracking-[0.2em] text-teal mb-6">03 / WINS</p>
         <WordsPullUp text="Victories" className="font-syne font-bold text-[36px] md:text-[56px] text-smoke mb-12 md:mb-16 leading-tight" />
@@ -75,7 +75,6 @@ export default function Achievements() {
               onMouseEnter={() => setVariant('hover')}
               onMouseLeave={() => setVariant('default')}
             >
-              <div className="text-[32px] mb-4">{item.emoji}</div>
               <p className="font-mono text-[11px] tracking-[0.2em] font-medium mb-2" style={{ color: item.accent }}>{item.place}</p>
               <h3 className="font-syne font-bold text-[18px] md:text-[20px] text-smoke mb-2 leading-tight">{item.title}</h3>
               <p className="font-body text-[13px] md:text-[14px] text-muted leading-relaxed">{item.description}</p>

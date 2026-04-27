@@ -5,10 +5,10 @@ const content = 'FREELANCE · WEB DEVELOPMENT · REACT · FULL-STACK · AVAILABL
 export default function Marquee() {
   return (
     <div
-      className="relative py-4 overflow-hidden"
+      className="relative py-4 overflow-hidden backdrop-blur-md"
       style={{
         transform: 'rotate(-1.5deg) scaleX(1.1)',
-        background: 'var(--surface)',
+        background: 'rgba(14, 14, 20, 0.4)',
         borderTop: '1px solid var(--border)',
         borderBottom: '1px solid var(--border)',
       }}

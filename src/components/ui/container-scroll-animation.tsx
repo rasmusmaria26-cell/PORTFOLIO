@@ -11,19 +11,19 @@ export function ContainerScroll({ children, titleComponent }: ContainerScrollPro
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start end', 'end start'],
+    offset: ['start 90%', 'start 30%'],
   })
 
-  const rotateX = useTransform(scrollYProgress, [0, 0.3], [20, 0])
-  const scale = useTransform(scrollYProgress, [0, 0.3], [1.05, 1])
-  const opacity = useTransform(scrollYProgress, [0, 0.15], [0, 1])
-  const translateY = useTransform(scrollYProgress, [0, 0.3], [60, 0])
+  const rotateX = useTransform(scrollYProgress, [0, 1], [18, 0])
+  const scale = useTransform(scrollYProgress, [0, 1], [0.97, 1])
+  const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1])
+  const translateY = useTransform(scrollYProgress, [0, 1], [40, 0])
 
   return (
     <div
       ref={containerRef}
       className="relative"
-      style={{ perspective: '1200px' }}
+      style={{ perspective: '1400px', perspectiveOrigin: 'center top' }}
     >
       {titleComponent && <div className="mb-8">{titleComponent}</div>}
       <motion.div
@@ -33,6 +33,7 @@ export function ContainerScroll({ children, titleComponent }: ContainerScrollPro
           opacity,
           translateY,
           transformOrigin: 'center top',
+          willChange: 'transform, opacity',
         }}
       >
         {children}

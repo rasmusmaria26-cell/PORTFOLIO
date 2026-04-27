@@ -34,46 +34,53 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col justify-end pb-16 md:pb-24 overflow-hidden"
-      style={{ background: 'var(--bg)' }}
+      className="relative flex flex-col overflow-hidden pb-16 md:min-h-screen md:justify-end md:pb-24"
     >
       {/* CSS star field — zero JS */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
         <div className="stars" />
       </div>
 
-      {/* Pixel art video frame */}
-      <div className="flex justify-center pt-[15vh] md:pt-[12vh] pb-8 md:pb-0 md:absolute md:top-[12%] md:left-1/2 md:-translate-x-1/2 z-10 px-6"
+      {/* Video — top-half on mobile, right-side bleed on desktop */}
+      <div
         ref={frameRef}
+        className="absolute top-0 left-0 w-full h-[55vh] md:inset-y-0 md:left-auto md:right-0 md:w-[55%] md:h-auto z-0 pointer-events-none"
       >
+        {/* Mobile gradient: strong bottom fade so text stays readable */}
         <div
-          className="relative w-[280px] h-[210px] md:w-[420px] md:h-[320px] rounded overflow-hidden"
+          className="absolute inset-0 z-10 md:hidden"
           style={{
-            border: '1px solid rgba(77,255,210,0.2)',
-            boxShadow: '0 0 60px rgba(77,255,210,0.06)',
-            background: '#0a0a12',
+            background: 'linear-gradient(to bottom, rgba(6,6,8,0.1) 0%, rgba(6,6,8,0.5) 50%, #060608 90%)',
           }}
-        >
-          <video
-            ref={videoRef}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="none"
-            className="w-full h-full object-cover"
-            aria-label="Pixel art coding scene"
-          />
-        </div>
+        />
+        {/* Desktop gradient: left-to-right fade + bottom fade */}
+        <div
+          className="absolute inset-0 z-10 hidden md:block"
+          style={{
+            background: 'linear-gradient(to right, #060608 0%, #060608 15%, rgba(6,6,8,0.6) 45%, transparent 100%)',
+          }}
+        />
+        <div
+          className="absolute inset-0 z-10 hidden md:block"
+          style={{
+            background: 'linear-gradient(to top, #060608 0%, transparent 30%)',
+          }}
+        />
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="none"
+          className="w-full h-full object-cover object-center md:object-left"
+          style={{ opacity: 0.5 }}
+          aria-label="Pixel art coding scene"
+        />
       </div>
 
-      {/* Caption below video (mobile: visible here, desktop: below absolute frame) */}
-      <p className="font-mono text-[11px] text-muted text-center mb-8 md:absolute md:top-[calc(12%+340px)] md:left-1/2 md:-translate-x-1/2 z-10">
-        {'// currently: building things'}
-      </p>
-
-      {/* Hero text — bottom-left desktop, centered mobile */}
-      <div className="max-w-[1200px] w-full mx-auto relative z-20 px-6 md:px-12 text-center md:text-left">
+      {/* Hero text — flows right under video on mobile, pinned bottom-left on desktop */}
+      <div className="relative z-20 mt-[38vh] md:mt-0 max-w-[1200px] w-full mx-auto px-6 md:px-12 text-center md:text-left">
         <PrismaHero
           eyebrow="[ AVAILABLE FOR HIRE ]"
           name="MARIA RASMUS R"
@@ -85,6 +92,16 @@ export default function Hero() {
               interval={2000}
             />
           </div>
+
+          {/* Location + availability tag — mobile only */}
+          <motion.p
+            className="md:hidden font-mono text-[11px] text-muted mt-4 tracking-wider"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 0.6 }}
+          >
+            Tamil Nadu, India &nbsp;·&nbsp; Open to freelance &amp; full-time
+          </motion.p>
 
           <motion.div
             className="flex flex-wrap items-center justify-center md:justify-start gap-4 mt-8"
@@ -110,6 +127,21 @@ export default function Hero() {
                 Download CV
               </Button>
             </a>
+          </motion.div>
+
+          {/* Stat row — mobile only, fills remaining space nicely */}
+          <motion.div
+            className="md:hidden flex justify-center gap-8 mt-10 pb-2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.4, duration: 0.6 }}
+          >
+            {[['4', 'Projects'], ['2', 'Hackathon Wins'], ['3+', 'Years']].map(([num, label]) => (
+              <div key={label} className="flex flex-col items-center gap-1">
+                <span className="font-clash font-bold text-[24px] text-teal leading-none">{num}</span>
+                <span className="font-mono text-[9px] text-muted tracking-widest uppercase">{label}</span>
+              </div>
+            ))}
           </motion.div>
         </PrismaHero>
       </div>

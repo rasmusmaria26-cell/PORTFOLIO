@@ -28,13 +28,7 @@ const projects: Project[] = [
     accent: '#4DFFD2', link: '#', linkLabel: 'GitHub ↗',
   },
   {
-    id: '04', badge: 'AI · WEB APP', title: 'IronFace — AI Attendance',
-    description: 'Face recognition gym kiosk. SSD MobileNetV1 + 128-D descriptor matching, fully on-device via WASM. Real-time admin dashboard with CSV export. No cloud.',
-    tags: ['Node.js', 'TensorFlow.js', 'face-api.js', 'WASM', 'Vanilla JS'], image: '/screenshots/ironface.jpg',
-    accent: '#FF4DFF', link: '#', linkLabel: 'GitHub ↗',
-  },
-  {
-    id: '05', badge: 'PRODUCT · ANDROID', title: 'Servify — Service Aggregator',
+    id: '04', badge: 'PRODUCT · ANDROID', title: 'Servify — Service Aggregator',
     description: 'Two-role Android app to compare verified repair vendors by price and rating. Four-step booking flow, real-time status tracking, KYC vendor verification.',
     tags: ['Kotlin', 'Jetpack Compose', 'Supabase', 'Hilt', 'MVVM'], image: '/screenshots/servify.jpg',
     accent: '#4DFFD2', link: '#', linkLabel: 'GitHub ↗',
@@ -148,7 +142,7 @@ export default function Works() {
   }, [])
 
   return (
-    <section id="works" className="py-20 md:py-[120px] px-6 md:px-12 relative" style={{ background: 'var(--bg)' }}>
+    <section id="works" className="py-20 md:py-[120px] px-6 md:px-12 relative">
       <div className="max-w-[1200px] mx-auto relative" ref={ghostRef}>
         {/* Ghost text — desktop only */}
         <motion.div className="absolute -top-20 left-0 pointer-events-none select-none z-0 hidden md:block"

@@ -15,29 +15,31 @@ export function PrismaHero({ eyebrow, name, children }: PrismaHeroProps) {
       {/* Eyebrow */}
       <motion.p
         className="font-mono text-[10px] md:text-[11px] tracking-[0.2em] text-teal mb-4"
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
+        transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
       >
         {eyebrow}
       </motion.p>
 
-      {/* Name — clip mask wipe per word */}
+      {/* Name — clip-path wipe per word */}
       <h1
         className="font-clash font-extrabold tracking-[-0.04em] text-smoke leading-[0.95]"
         style={{ fontSize: 'clamp(42px, 11vw, 140px)' }}
+        aria-label={name}
       >
         {words.map((word, i) => (
-          <span key={i} className="inline-block overflow-hidden mr-[0.2em] md:mr-[0.25em]">
+          <span key={i} className="inline-block mr-[0.2em] md:mr-[0.25em]">
             <motion.span
               className="inline-block"
-              initial={{ y: '110%' }}
-              animate={{ y: '0%' }}
+              initial={{ clipPath: 'inset(0 100% 0 0)' }}
+              animate={{ clipPath: 'inset(0 0% 0 0)' }}
               transition={{
-                duration: 0.8,
+                duration: 0.9,
                 delay: 0.4 + i * 0.12,
                 ease: [0.16, 1, 0.3, 1],
               }}
+              style={{ willChange: 'clip-path' }}
             >
               {word}
             </motion.span>
