@@ -1,0 +1,201 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: #060608;
+    --surface: #0e0e14;
+    --surface2: #1a1a2e;
+    --teal: #4DFFD2;
+    --magenta: #FF4DFF;
+    --text: #F0F0F0;
+    --muted: #52526b;
+    --ghost: #ffffff06;
+    --border: #ffffff0f;
+
+    /* shadcn vars */
+    --background: 0 0% 2%;
+    --foreground: 0 0% 94%;
+    --primary: 165 100% 65%;
+    --primary-foreground: 0 0% 2%;
+    --secondary: 300 100% 65%;
+    --secondary-foreground: 0 0% 2%;
+    --muted-hsl: 240 5% 36%;
+    --muted-foreground: 240 5% 65%;
+    --border-hsl: 240 10% 10%;
+    --destructive: 0 84% 60%;
+    --ring: 165 100% 65%;
+    --radius: 0.25rem;
+  }
+
+  * { border-color: var(--border); }
+
+  html, body { overflow-x: hidden; }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+  }
+
+  /* Hide native cursor on desktop only */
+  @media (hover: hover) {
+    html, body, a, button { cursor: none; }
+  }
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--teal); border-radius: 2px; }
+
+/* ── CSS Star Field (box-shadow technique — zero JS) ── */
+.stars {
+  position: absolute;
+  top: 0; left: 0;
+  width: 1px; height: 1px;
+  background: transparent;
+  box-shadow:
+    70px 80px 0 rgba(255,255,255,.35), 150px 340px 0 rgba(255,255,255,.25),
+    230px 120px 0 rgba(255,255,255,.45), 340px 500px 0 rgba(255,255,255,.3),
+    450px 60px 0 rgba(255,255,255,.4), 520px 320px 0 rgba(255,255,255,.2),
+    610px 450px 0 rgba(255,255,255,.5), 700px 180px 0 rgba(255,255,255,.3),
+    780px 600px 0 rgba(255,255,255,.25), 890px 90px 0 rgba(255,255,255,.4),
+    960px 400px 0 rgba(255,255,255,.35), 1050px 250px 0 rgba(255,255,255,.3),
+    1140px 550px 0 rgba(255,255,255,.2), 1230px 130px 0 rgba(255,255,255,.45),
+    1320px 480px 0 rgba(255,255,255,.3), 1410px 200px 0 rgba(255,255,255,.4),
+    1500px 370px 0 rgba(255,255,255,.25), 1580px 100px 0 rgba(255,255,255,.5),
+    1650px 520px 0 rgba(255,255,255,.3), 1730px 300px 0 rgba(255,255,255,.35),
+    1800px 450px 0 rgba(255,255,255,.2), 1870px 50px 0 rgba(255,255,255,.4),
+    1920px 350px 0 rgba(255,255,255,.3), 90px 650px 0 rgba(255,255,255,.25),
+    200px 700px 0 rgba(255,255,255,.4), 350px 200px 0 rgba(255,255,255,.35),
+    480px 750px 0 rgba(255,255,255,.3), 550px 150px 0 rgba(255,255,255,.45),
+    680px 680px 0 rgba(255,255,255,.2), 760px 30px 0 rgba(255,255,255,.5),
+    840px 530px 0 rgba(255,255,255,.3), 930px 260px 0 rgba(255,255,255,.4),
+    1020px 700px 0 rgba(255,255,255,.25), 1100px 380px 0 rgba(255,255,255,.35),
+    1200px 620px 0 rgba(255,255,255,.3), 1290px 70px 0 rgba(255,255,255,.4),
+    1380px 310px 0 rgba(255,255,255,.2), 1470px 580px 0 rgba(255,255,255,.5),
+    1550px 160px 0 rgba(255,255,255,.3), 1640px 440px 0 rgba(255,255,255,.35),
+    1720px 710px 0 rgba(255,255,255,.4), 1810px 220px 0 rgba(255,255,255,.25),
+    1900px 500px 0 rgba(255,255,255,.3), 40px 420px 0 rgba(255,255,255,.45),
+    130px 570px 0 rgba(255,255,255,.2), 260px 40px 0 rgba(255,255,255,.4),
+    370px 660px 0 rgba(255,255,255,.3), 490px 290px 0 rgba(255,255,255,.5),
+    580px 530px 0 rgba(255,255,255,.25), 660px 110px 0 rgba(255,255,255,.35),
+    750px 400px 0 rgba(255,255,255,.4), 830px 740px 0 rgba(255,255,255,.2),
+    920px 170px 0 rgba(255,255,255,.3), 1010px 490px 0 rgba(255,255,255,.45),
+    1090px 60px 0 rgba(255,255,255,.3), 1180px 350px 0 rgba(255,255,255,.4),
+    1270px 590px 0 rgba(255,255,255,.25), 1360px 140px 0 rgba(255,255,255,.5),
+    1440px 430px 0 rgba(255,255,255,.3), 1530px 700px 0 rgba(255,255,255,.35),
+    1610px 280px 0 rgba(255,255,255,.2), 1690px 560px 0 rgba(255,255,255,.4),
+    1770px 380px 0 rgba(255,255,255,.3), 1850px 650px 0 rgba(255,255,255,.25),
+    1930px 200px 0 rgba(255,255,255,.45), 110px 250px 0 rgba(255,255,255,.3),
+    290px 440px 0 rgba(255,255,255,.4), 410px 100px 0 rgba(255,255,255,.2),
+    530px 600px 0 rgba(255,255,255,.35), 640px 330px 0 rgba(255,255,255,.5),
+    720px 500px 0 rgba(255,255,255,.3), 810px 200px 0 rgba(255,255,255,.4),
+    900px 640px 0 rgba(255,255,255,.25), 990px 340px 0 rgba(255,255,255,.3),
+    1070px 100px 0 rgba(255,255,255,.45), 1160px 460px 0 rgba(255,255,255,.2),
+    1250px 230px 0 rgba(255,255,255,.4), 1340px 680px 0 rgba(255,255,255,.3),
+    1420px 50px 0 rgba(255,255,255,.35), 1510px 400px 0 rgba(255,255,255,.5),
+    1600px 620px 0 rgba(255,255,255,.2), 1680px 140px 0 rgba(255,255,255,.4),
+    1760px 530px 0 rgba(255,255,255,.3), 1840px 300px 0 rgba(255,255,255,.25),
+    1910px 700px 0 rgba(255,255,255,.4), 60px 160px 0 rgba(255,255,255,.3),
+    180px 480px 0 rgba(255,255,255,.5), 310px 310px 0 rgba(255,255,255,.35),
+    420px 580px 0 rgba(255,255,255,.2), 540px 70px 0 rgba(255,255,255,.4),
+    620px 260px 0 rgba(255,255,255,.3), 710px 630px 0 rgba(255,255,255,.25),
+    800px 350px 0 rgba(255,255,255,.45), 880px 480px 0 rgba(255,255,255,.3),
+    970px 80px 0 rgba(255,255,255,.4), 1060px 550px 0 rgba(255,255,255,.2),
+    1130px 200px 0 rgba(255,255,255,.35), 1220px 700px 0 rgba(255,255,255,.5),
+    1300px 410px 0 rgba(255,255,255,.3), 1390px 250px 0 rgba(255,255,255,.4),
+    1480px 640px 0 rgba(255,255,255,.25), 1560px 340px 0 rgba(255,255,255,.3),
+    1630px 60px 0 rgba(255,255,255,.45), 1710px 480px 0 rgba(255,255,255,.2),
+    1790px 150px 0 rgba(255,255,255,.4), 1860px 550px 0 rgba(255,255,255,.3),
+    1940px 420px 0 rgba(255,255,255,.35), 50px 730px 0 rgba(255,255,255,.4),
+    160px 20px 0 rgba(255,255,255,.25), 270px 580px 0 rgba(255,255,255,.3),
+    380px 360px 0 rgba(255,255,255,.5), 500px 450px 0 rgba(255,255,255,.2),
+    590px 190px 0 rgba(255,255,255,.4), 670px 550px 0 rgba(255,255,255,.35),
+    740px 270px 0 rgba(255,255,255,.3), 820px 610px 0 rgba(255,255,255,.25),
+    910px 430px 0 rgba(255,255,255,.4), 1000px 150px 0 rgba(255,255,255,.3),
+    1080px 300px 0 rgba(255,255,255,.5), 1170px 680px 0 rgba(255,255,255,.2),
+    1260px 500px 0 rgba(255,255,255,.4), 1350px 360px 0 rgba(255,255,255,.35),
+    1430px 120px 0 rgba(255,255,255,.3), 1520px 540px 0 rgba(255,255,255,.25),
+    1600px 400px 0 rgba(255,255,255,.4), 1700px 240px 0 rgba(255,255,255,.3),
+    1780px 660px 0 rgba(255,255,255,.5), 1850px 100px 0 rgba(255,255,255,.2),
+    1920px 580px 0 rgba(255,255,255,.35), 30px 320px 0 rgba(255,255,255,.4),
+    140px 640px 0 rgba(255,255,255,.3), 250px 190px 0 rgba(255,255,255,.25),
+    360px 740px 0 rgba(255,255,255,.45), 460px 400px 0 rgba(255,255,255,.3),
+    560px 680px 0 rgba(255,255,255,.2), 650px 50px 0 rgba(255,255,255,.4),
+    730px 380px 0 rgba(255,255,255,.35), 815px 130px 0 rgba(255,255,255,.3);
+}
+
+/* ── CSS Marquee Animation ── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ── Scroll Indicator ── */
+@keyframes scroll-travel {
+  0% { transform: translateY(-60px); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: translateY(60px); opacity: 0; }
+}
+
+.scroll-line-wrapper {
+  width: 1px; height: 60px;
+  background: rgba(255,255,255,0.06);
+  position: relative; overflow: hidden;
+  margin: 0.75rem auto 0;
+}
+.scroll-line-highlight {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 50%;
+  background: linear-gradient(to bottom, transparent, var(--teal), transparent);
+  animation: scroll-travel 1.5s ease-in-out infinite;
+}
+
+/* ── Ghost Text ── */
+.ghost-text { color: rgba(255,255,255,0.016); }
+
+/* ── Heartbeat ── */
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.3); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.3); }
+  56% { transform: scale(1); }
+}
+.heartbeat { display: inline-block; animation: heartbeat 1.5s ease-in-out infinite; }
+
+/* ── Aurora ── */
+@keyframes aurora-breathe {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+.aurora-glow { animation: aurora-breathe 8s ease-in-out infinite; }
+
+/* ── Grid BG (footer) ── */
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.012) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.012) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── SR Only (a11y) ── */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border-width: 0;
+}
