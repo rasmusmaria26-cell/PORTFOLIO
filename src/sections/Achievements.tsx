@@ -60,9 +60,25 @@ export default function Achievements() {
     <section id="achievements" className="py-20 md:py-[120px] px-6 md:px-12">
       <div className="max-w-[1200px] mx-auto">
         <p className="font-mono text-[11px] tracking-[0.2em] text-teal mb-6">03 / WINS</p>
-        <WordsPullUp text="Victories" className="font-syne font-bold text-[36px] md:text-[56px] text-smoke mb-12 md:mb-16 leading-tight" />
+        <WordsPullUp text="Victories" className="font-syne font-bold text-[36px] md:text-[56px] text-smoke mb-12 leading-tight" />
 
-        <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 md:mb-16">
+        {/* Education & Certification Banner */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 md:p-8 border border-line rounded bg-surface/30 mb-12 md:mb-16">
+          <div className="space-y-1">
+            <span className="font-mono text-[10px] tracking-[0.2em] text-teal uppercase">Education</span>
+            <h4 className="font-syne font-bold text-[18px] md:text-[20px] text-smoke">B.Tech CS</h4>
+            <p className="font-body text-[13px] md:text-[14px] text-muted">Kalasalingam Academy of Research and Education (KARE)</p>
+            <p className="font-mono text-[12px] text-teal">2022–Present · CGPA 7.84</p>
+          </div>
+          <div className="space-y-1">
+            <span className="font-mono text-[10px] tracking-[0.2em] text-teal uppercase">Certification</span>
+            <h4 className="font-syne font-bold text-[18px] md:text-[20px] text-smoke">Cisco Ethical Hacker</h4>
+            <p className="font-body text-[13px] md:text-[14px] text-muted">Cisco Networking Academy</p>
+            <p className="font-mono text-[12px] text-teal">October 2024</p>
+          </div>
+        </div>
+
+        <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {achievements.map((item, i) => (
             <motion.div
               key={item.title}
@@ -80,16 +96,6 @@ export default function Achievements() {
               <p className="font-body text-[13px] md:text-[14px] text-muted leading-relaxed">{item.description}</p>
             </motion.div>
           ))}
-        </div>
-
-        {/* Education */}
-        <div className="text-center space-y-2">
-          <p className="font-mono text-[11px] md:text-[12px] text-muted">
-            B.Tech CS · KARE · 2022–Present · CGPA 7.65
-          </p>
-          <p className="font-mono text-[10px] md:text-[11px] text-muted">
-            Cisco Ethical Hacker · Cisco Networking Academy · Oct 2024
-          </p>
         </div>
       </div>
     </section>
